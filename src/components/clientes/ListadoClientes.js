@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import Cliente from './Cliente'
 import styled from 'styled-components'
 
@@ -12,7 +12,7 @@ const ListadoClientes = () => {
         { nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
     ]);
 
-    console.log(clientes[0]);
+
     return (
         <TablaClientes>
             <tr>
@@ -38,7 +38,7 @@ const ListadoClientes = () => {
 export default ListadoClientes;
 
 const TablaClientes = styled.table`
-    width:70%;
+    width:80%;
     border-collapse: collapse;
 `;
 

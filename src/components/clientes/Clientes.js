@@ -44,15 +44,15 @@ const Container = styled.div`
 const DivClientes = styled.div`
     width: calc(100% - 300px);
     min-height:100vh;
-    padding:20px 30px;
+    padding:50px;
 `;
 
 const Titulo = styled.h1`
-    margin-bottom:20px;
+    margin-bottom:50px;
 `;
 
 const DivBarraBtn = styled.div`
-    width:70%;
+    width:80%;
     display:flex;
     justify-content:space-between;
     align-items:center;
