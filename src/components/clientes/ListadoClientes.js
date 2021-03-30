@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Cliente from './Cliente'
+import clienteContext from '../context/clientes/clienteContext'
 import styled from 'styled-components'
+
 
 const ListadoClientes = () => {
 
-    const [clientes, guardarClientes] = useState([
-        { nombre: 'Santos Hermoso', patente: 'DH3487', tel: '9876 5434' },
-        { nombre: 'Latifa Cabello', patente: 'KU2948', tel: '8642 7568' },
-        { nombre: 'Adan Vera', patente: 'KOFT34', tel: '9362 3610' },
-        { nombre: 'Yoel Conesa', patente: 'NA2843', tel: '8315 3697' },
-        { nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
-    ]);
+    // Extraer clientes de state inicial
+    const clientesContext = useContext(clienteContext);
+    const { clientes, obtenerClientes } = clientesContext;
+
+    useEffect(() => {
+
+        obtenerClientes();
+    }, []);
 
 
     return (

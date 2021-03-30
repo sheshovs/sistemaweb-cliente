@@ -1,15 +1,65 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import Sidebar from '../layout/Sidebar'
+import clienteContext from '../context/clientes/clienteContext'
+import { useHistory } from 'react-router-dom';
+
 import styled from 'styled-components'
 
 const NuevoCliente = () => {
+
+    const routerHistory = useHistory();
+
+    // Extraer clientes de state inicial
+    const clientesContext = useContext(clienteContext);
+    const { agregarCliente } = clientesContext;
+
+    const [cliente, guardarCliente] = useState({
+        nombre: '',
+        patente: '',
+        tel: '',
+        marca: '',
+        modelo: '',
+    });
+
+    const { nombre, patente, tel, marca, modelo } = cliente;
+
+    const onChange = (e) => {
+        guardarCliente({
+            ...cliente,
+            [e.target.name]: e.target.value
+        })
+    }
+    const onSubmitForm = e => {
+        e.preventDefault();
+
+        //validar campos vacios
+        if (nombre.trim() === '' || patente.trim() === '' || tel.trim() === '' ||
+            marca.trim() === '' || modelo.trim() === '') {
+            return;
+        }
+
+        //enviar los datos al action
+        agregarCliente(cliente);
+
+        guardarCliente({
+            nombre: '',
+            patente: '',
+            tel: '',
+            marca: '',
+            modelo: '',
+        });
+        routerHistory.push('/clientes');
+    }
+
     return (
         <Container>
             <Sidebar />
 
             <DivClientes>
                 <Titulo>Agregar nuevo cliente</Titulo>
-                <Formulario>
+                <Formulario
+                    onSubmit={onSubmitForm}
+                >
                     <FormGroup>
                         <Label htmlFor="nombre">Nombre:</Label>
                         <Input
@@ -17,6 +67,8 @@ const NuevoCliente = () => {
                             name='nombre'
                             id='nombre'
                             placeholder='Ingrese nombre del cliente'
+                            onChange={onChange}
+                            value={nombre}
                         />
                     </FormGroup>
                     <FormGroup2>
@@ -27,6 +79,8 @@ const NuevoCliente = () => {
                                 name='patente'
                                 id='patente'
                                 placeholder='Ingrese patente del vehiculo'
+                                onChange={onChange}
+                                value={patente}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -36,6 +90,8 @@ const NuevoCliente = () => {
                                 name='tel'
                                 id='tel'
                                 placeholder='Ingrese el teléfono del cliente'
+                                onChange={onChange}
+                                value={tel}
                             />
                         </FormGroup>
                     </FormGroup2>
@@ -47,6 +103,8 @@ const NuevoCliente = () => {
                                 name='marca'
                                 id='marca'
                                 placeholder='Ingrese marca del vehiculo'
+                                onChange={onChange}
+                                value={marca}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -56,6 +114,8 @@ const NuevoCliente = () => {
                                 name='modelo'
                                 id='modelo'
                                 placeholder='Ingrese el modelo del cliente'
+                                onChange={onChange}
+                                value={modelo}
                             />
                         </FormGroup>
                     </FormGroup2>
