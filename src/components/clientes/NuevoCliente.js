@@ -40,7 +40,6 @@ const NuevoCliente = () => {
 
         //enviar los datos al action
         agregarCliente(cliente);
-
         guardarCliente({
             nombre: '',
             patente: '',

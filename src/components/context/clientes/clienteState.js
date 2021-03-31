@@ -1,28 +1,41 @@
 import React, { useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import clienteContext from './clienteContext';
 import clienteReducer from './clienteReducer';
 import {
     AGREGAR_CLIENTE,
-    OBTENER_CLIENTES
+    OBTENER_CLIENTES,
+    FILTRAR_CLIENTES
 } from '../../types/index';
+
 
 const ClienteState = (props) => {
 
+    const clientes = [
+        { id: uuidv4(), nombre: 'Santos Hermoso', patente: 'DH3487', tel: '9876 5434' },
+        { id: uuidv4(), nombre: 'Latifa Cabello', patente: 'KU2948', tel: '8642 7568' },
+        { id: uuidv4(), nombre: 'Adan Vera', patente: 'KOFT34', tel: '9362 3610' },
+        { id: uuidv4(), nombre: 'Yoel Conesa', patente: 'NA2843', tel: '8315 3697' },
+        { id: uuidv4(), nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
+    ]
+
     const initialState = {
-        clientes: [
-            { nombre: 'Santos Hermoso', patente: 'DH3487', tel: '9876 5434' },
-            { nombre: 'Latifa Cabello', patente: 'KU2948', tel: '8642 7568' },
-            { nombre: 'Adan Vera', patente: 'KOFT34', tel: '9362 3610' },
-            { nombre: 'Yoel Conesa', patente: 'NA2843', tel: '8315 3697' },
-            { nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
-        ]
+        clientes: []
     }
 
     // Dispatch para ejecutar las acciones
     const [state, dispatch] = useReducer(clienteReducer, initialState);
 
-    const agregarCliente = (cliente) => {
+    const obtenerClientes = () => {
+        dispatch({
+            type: OBTENER_CLIENTES,
+            payload: clientes
+        })
+    }
+
+    const agregarCliente = cliente => {
+        cliente.id = uuidv4();
 
         dispatch({
             type: AGREGAR_CLIENTE,
@@ -30,9 +43,11 @@ const ClienteState = (props) => {
         })
     }
 
-    const obtenerClientes = () => {
+    const filtrarClientes = patente => {
+
         dispatch({
-            type: OBTENER_CLIENTES
+            type: FILTRAR_CLIENTES,
+            payload: patente
         })
     }
 
@@ -40,8 +55,10 @@ const ClienteState = (props) => {
         <clienteContext.Provider
             value={{
                 clientes: state.clientes,
+                filtro: state.filtro,
                 agregarCliente,
-                obtenerClientes
+                obtenerClientes,
+                filtrarClientes
             }}
         >
             {props.children}

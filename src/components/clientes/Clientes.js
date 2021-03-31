@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Sidebar from '../layout/Sidebar'
 import ListadoClientes from './ListadoClientes'
+import clienteContext from '../context/clientes/clienteContext'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Clientes = () => {
+
+    // Extraer clientes de state inicial
+    const clientesContext = useContext(clienteContext);
+    const { filtrarClientes, obtenerClientes } = clientesContext;
+
+    const [filtro, guardarFiltro] = useState({
+        patente: ''
+    });
+
+    const { patente } = filtro;
+
+    useEffect(() => {
+
+        obtenerClientes();
+        filtrarClientes(patente);
+
+        // eslint-disable-next-line
+    }, [patente]);
+
+    const onChange = e => {
+        guardarFiltro({
+            ...filtro,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <Container>
             <Sidebar />
@@ -16,6 +43,8 @@ const Clientes = () => {
                             type='text'
                             placeholder='Buscar patente'
                             name='patente'
+                            onChange={onChange}
+                            value={patente}
                         />
                         <Buscar
                             type='button'

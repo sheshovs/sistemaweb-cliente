@@ -10,30 +10,37 @@ const ListadoClientes = () => {
     const clientesContext = useContext(clienteContext);
     const { clientes, obtenerClientes } = clientesContext;
 
+    console.log(clientes);
     useEffect(() => {
 
         obtenerClientes();
+
+        // eslint-disable-next-line
     }, []);
 
+    if (clientes.length === 0) return null;
 
     return (
         <TablaClientes>
-            <tr>
-                <THead>Nombre</THead>
-                <THead>Patente</THead>
-                <THead>Teléfono</THead>
-                <THead>Acción</THead>
-            </tr>
-
-            {clientes.map(cliente => (
-                <TRbody>
-                    <Cliente
+            <thead>
+                <tr>
+                    <THead>Nombre</THead>
+                    <THead>Patente</THead>
+                    <THead>Teléfono</THead>
+                    <THead>Acción</THead>
+                </tr>
+            </thead>
+            <tbody>
+                {clientes.map(cliente => (
+                    <TRbody
                         key={cliente.patente}
-                        cliente={cliente}
-                    />
-                </TRbody>
-            ))}
-
+                    >
+                        <Cliente
+                            cliente={cliente}
+                        />
+                    </TRbody>
+                ))}
+            </tbody>
         </TablaClientes>
     );
 };
@@ -49,6 +56,7 @@ const THead = styled.th`
     background-color: cadetblue;
     color:white;
     padding:20px 0;
+    width:25%;
 `;
 
 const TRbody = styled.tr`
