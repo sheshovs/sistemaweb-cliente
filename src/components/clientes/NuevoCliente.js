@@ -1,17 +1,13 @@
-import React, { useState, useContext } from 'react';
-import Sidebar from '../layout/Sidebar'
+import React, { Fragment, useState, useContext } from 'react';
 import clienteContext from '../context/clientes/clienteContext'
-import { useHistory } from 'react-router-dom';
-
 import styled from 'styled-components'
 
 const NuevoCliente = () => {
 
-    const routerHistory = useHistory();
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { agregarCliente } = clientesContext;
+    const { agregarCliente, handleNuevoCliente } = clientesContext;
 
     const [cliente, guardarCliente] = useState({
         nombre: '',
@@ -47,103 +43,129 @@ const NuevoCliente = () => {
             marca: '',
             modelo: '',
         });
-        routerHistory.push('/clientes');
+    }
+
+    const cerrarPopup = () => {
+        handleNuevoCliente(false);
     }
 
     return (
-        <Container>
-            <Sidebar />
-
-            <DivClientes>
-                <Titulo>Agregar nuevo cliente</Titulo>
-                <Formulario
-                    onSubmit={onSubmitForm}
-                >
-                    <FormGroup>
-                        <Label htmlFor="nombre">Nombre:</Label>
-                        <Input
-                            type='text'
-                            name='nombre'
-                            id='nombre'
-                            placeholder='Ingrese nombre del cliente'
-                            onChange={onChange}
-                            value={nombre}
-                        />
-                    </FormGroup>
-                    <FormGroup2>
-                        <FormGroup>
-                            <Label htmlFor="patente">Patente:</Label>
-                            <Input
-                                type='text'
-                                name='patente'
-                                id='patente'
-                                placeholder='Ingrese patente del vehiculo'
-                                onChange={onChange}
-                                value={patente}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="tel">Teléfono:</Label>
-                            <Input
-                                type='text'
-                                name='tel'
-                                id='tel'
-                                placeholder='Ingrese el teléfono del cliente'
-                                onChange={onChange}
-                                value={tel}
-                            />
-                        </FormGroup>
-                    </FormGroup2>
-                    <FormGroup2>
-                        <FormGroup>
-                            <Label htmlFor="marca">Marca:</Label>
-                            <Input
-                                type='text'
-                                name='marca'
-                                id='marca'
-                                placeholder='Ingrese marca del vehiculo'
-                                onChange={onChange}
-                                value={marca}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="modelo">Modelo:</Label>
-                            <Input
-                                type='text'
-                                name='modelo'
-                                id='modelo'
-                                placeholder='Ingrese el modelo del cliente'
-                                onChange={onChange}
-                                value={modelo}
-                            />
-                        </FormGroup>
-                    </FormGroup2>
-                    <BtnEnviar
-                        type='submit'
+        <Fragment>
+            <Fondo onClick={cerrarPopup}></Fondo>
+            <Container>
+                <DivClientes>
+                    <Titulo>Agregar nuevo cliente</Titulo>
+                    <Formulario
+                        onSubmit={onSubmitForm}
                     >
-                        Agregar cliente
-                    </BtnEnviar>
-                </Formulario>
-            </DivClientes>
+                        <FormGroup>
+                            <Label htmlFor="nombre">Nombre:</Label>
+                            <Input
+                                type='text'
+                                name='nombre'
+                                id='nombre'
+                                placeholder='Ingrese nombre del cliente'
+                                onChange={onChange}
+                                value={nombre}
+                            />
+                        </FormGroup>
+                        <FormGroup2>
+                            <FormGroup>
+                                <Label htmlFor="patente">Patente:</Label>
+                                <Input
+                                    type='text'
+                                    name='patente'
+                                    id='patente'
+                                    placeholder='Ingrese patente del vehiculo'
+                                    onChange={onChange}
+                                    value={patente}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="tel">Teléfono:</Label>
+                                <Input
+                                    type='text'
+                                    name='tel'
+                                    id='tel'
+                                    placeholder='Ingrese el teléfono del cliente'
+                                    onChange={onChange}
+                                    value={tel}
+                                />
+                            </FormGroup>
+                        </FormGroup2>
+                        <FormGroup2>
+                            <FormGroup>
+                                <Label htmlFor="marca">Marca:</Label>
+                                <Input
+                                    type='text'
+                                    name='marca'
+                                    id='marca'
+                                    placeholder='Ingrese marca del vehiculo'
+                                    onChange={onChange}
+                                    value={marca}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="modelo">Modelo:</Label>
+                                <Input
+                                    type='text'
+                                    name='modelo'
+                                    id='modelo'
+                                    placeholder='Ingrese el modelo del cliente'
+                                    onChange={onChange}
+                                    value={modelo}
+                                />
+                            </FormGroup>
+                        </FormGroup2>
+                        <FormGroup2>
+                            <BtnEnviar
+                                type='submit'
+                            >
+                                Agregar cliente
+                            </BtnEnviar>
+                            <BtnCancelar
+                                type='button'
+                                onClick={cerrarPopup}
+                            >
+                                Cerrar
+                            </BtnCancelar>
+                        </FormGroup2>
+                    </Formulario>
+                </DivClientes>
 
-        </Container>
-
+            </Container>
+        </Fragment>
     );
 };
 
 export default NuevoCliente;
 
-const Container = styled.div`
+const Fondo = styled.div`
+    position:absolute;
     width: 100%;
     min-height:100vh;
     display:flex;
-    justify-content:flex-start;
+    justify-content:center;
+    align-items:center;
+    background-color:rgba(0,0,0,.5);
+`;
+
+const Container = styled.div`
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 `;
 
 const DivClientes = styled.div`
-    width: calc(100% - 300px);
-    min-height:100vh;
+    width:100%;
+    background-color:white;
+    min-height:500px;
     padding:50px;
+    border-radius:30px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 `;
 
 const Titulo = styled.h1`
@@ -151,13 +173,12 @@ const Titulo = styled.h1`
 `;
 
 const Formulario = styled.form`
-    width:80%;
+    width:100%;
     display: flex;
     flex-direction:column;
-    align-items:flex-start;
+    align-items:center;
 `;
 const FormGroup = styled.div`
-    width:100%;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -167,6 +188,8 @@ const FormGroup = styled.div`
 const FormGroup2 = styled.div`
     width:100%;
     display:flex;
+    justify-content:space-evenly;
+    margin:0 20px;
 `;
 
 const Label = styled.label`
@@ -175,7 +198,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-    width:500px;
+    width:450px;
     height:50px;
     border:none;
     border:1px solid rgba(0,0,0,.3);
@@ -193,6 +216,24 @@ const BtnEnviar = styled.button`
     width:200px;
     height:50px;
     background-color:cadetblue;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:20px;
+    border:none;
+    border-radius:5px;
+    cursor: pointer;
+
+    :hover{
+        text-decoration:underline;
+    }
+`;
+
+const BtnCancelar = styled.button`
+    width:200px;
+    height:50px;
+    background-color:#D34949;
     display:flex;
     justify-content:center;
     align-items:center;

@@ -6,7 +6,8 @@ import clienteReducer from './clienteReducer';
 import {
     AGREGAR_CLIENTE,
     OBTENER_CLIENTES,
-    FILTRAR_CLIENTES
+    FILTRAR_CLIENTES,
+    MOSTRAR_AGREGAR_CLIENTE
 } from '../../types/index';
 
 
@@ -21,7 +22,8 @@ const ClienteState = (props) => {
     ]
 
     const initialState = {
-        clientes: []
+        clientes: [],
+        popup: false
     }
 
     // Dispatch para ejecutar las acciones
@@ -51,14 +53,22 @@ const ClienteState = (props) => {
         })
     }
 
+    const handleNuevoCliente = (estado) => {
+        dispatch({
+            type: MOSTRAR_AGREGAR_CLIENTE,
+            payload: estado
+        })
+    }
+
     return (
         <clienteContext.Provider
             value={{
                 clientes: state.clientes,
-                filtro: state.filtro,
+                popup: state.popup,
                 agregarCliente,
                 obtenerClientes,
-                filtrarClientes
+                filtrarClientes,
+                handleNuevoCliente
             }}
         >
             {props.children}

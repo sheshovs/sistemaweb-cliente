@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Sidebar from '../layout/Sidebar'
+import NuevoCliente from './NuevoCliente'
 import ListadoClientes from './ListadoClientes'
 import clienteContext from '../context/clientes/clienteContext'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+
 
 const Clientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { filtrarClientes, obtenerClientes } = clientesContext;
+    const { popup, filtrarClientes, obtenerClientes, handleNuevoCliente } = clientesContext;
 
     const [filtro, guardarFiltro] = useState({
         patente: ''
@@ -32,8 +33,13 @@ const Clientes = () => {
         })
     }
 
+    const mostrarPopup = () => {
+        handleNuevoCliente(true);
+    }
+
     return (
         <Container>
+            {popup ? <NuevoCliente /> : null}
             <Sidebar />
             <DivClientes>
                 <Titulo>Clientes</Titulo>
@@ -50,8 +56,10 @@ const Clientes = () => {
                             type='button'
                         >Enviar</Buscar>
                     </Busqueda>
-                    <BtnNuevoCliente>
-                        <Link to={'/nuevo-cliente'} className='enlace'>Nuevo Cliente</Link>
+                    <BtnNuevoCliente
+                        onClick={mostrarPopup}
+                    >
+                        Nuevo Cliente
                     </BtnNuevoCliente>
                 </DivBarraBtn>
 
@@ -131,4 +139,7 @@ const BtnNuevoCliente = styled.div`
     justify-content:center;
     align-items:center;
     border-radius:5px;
+    color: white;
+    font-size: 20px;
+    cursor:pointer;
 `;
