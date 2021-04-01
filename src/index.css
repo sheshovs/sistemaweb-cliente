@@ -26,3 +26,17 @@ code {
 .enlace:hover{
   text-decoration: underline;
 }
+
+.btnTrabajos{
+  color: white;
+  text-decoration: none;
+}
+.volver{
+  text-decoration: none;
+  color: #666;
+  font-weight: bold;
+  font-size: 20px;
+}
+.volver:hover{
+  color:#222;
+}

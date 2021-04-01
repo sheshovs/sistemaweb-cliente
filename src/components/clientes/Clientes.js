@@ -82,6 +82,7 @@ const DivClientes = styled.div`
     width: calc(100% - 300px);
     min-height:100vh;
     padding:50px;
+    margin-left:300px;
 `;
 
 const Titulo = styled.h1`
@@ -134,12 +135,17 @@ const Buscar = styled.button`
 const BtnNuevoCliente = styled.div`
     width:200px;
     height:50px;
-    background-color:cadetblue;
     display:flex;
     justify-content:center;
     align-items:center;
-    border-radius:5px;
-    color: white;
     font-size: 20px;
-    cursor:pointer;
+    border-radius:5px;
+    border:1px solid rgba(0,0,0,.5);
+    background-color:cadetblue;
+    color:white;
+    cursor: pointer;
+
+    :hover{
+        background-color:rgba(95,158,160,.9);
+    }
 `;

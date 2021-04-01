@@ -1,9 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import clienteContext from '../context/clientes/clienteContext'
 
 const Cliente = ({ cliente }) => {
 
-    const { nombre, patente, tel } = cliente;
+    const clientesContext = useContext(clienteContext);
+    const { obtenerClienteActual } = clientesContext;
+
+    const { nombre, patente, tel, id } = cliente;
 
     return (
         <Fragment>
@@ -11,8 +16,12 @@ const Cliente = ({ cliente }) => {
             <TD>{patente}</TD>
             <TD>{tel}</TD>
             <TD>
-                <BtnTrabajos>
-                    Ver trabajos
+                <BtnTrabajos
+                    onClick={() => {
+                        obtenerClienteActual(id);
+                    }}
+                >
+                    <Link to={'/cliente/trabajos'} className='btnTrabajos'>Ver trabajos</Link>
                 </BtnTrabajos>
             </TD>
         </Fragment>

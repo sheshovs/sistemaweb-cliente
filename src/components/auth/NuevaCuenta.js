@@ -119,6 +119,7 @@ const BoxForm = styled.div`
 `;
 const Titulo = styled.h1`
     font-size:40px;
+    margin-bottom:30px;
 `;
 
 const Formulario = styled.form`

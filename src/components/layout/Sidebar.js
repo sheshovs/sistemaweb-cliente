@@ -31,6 +31,8 @@ const Container = styled.div`
     flex-direction:column;
     align-items:center;
     box-shadow: 2px 0px 5px rgba(0,0,0,.3);
+    position:fixed;
+    z-index:1;
 `;
 
 const Titulo = styled.h1`

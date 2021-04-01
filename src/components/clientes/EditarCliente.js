@@ -2,20 +2,18 @@ import React, { Fragment, useState, useContext } from 'react';
 import clienteContext from '../context/clientes/clienteContext'
 import styled from 'styled-components'
 
-const NuevoCliente = () => {
+const EditarCliente = () => {
 
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { agregarCliente, handleNuevoCliente } = clientesContext;
+    const { clienteActual, handleNuevoCliente, obtenerClienteActual, actualizarCliente } = clientesContext;
 
-    const [cliente, guardarCliente] = useState({
-        nombre: '',
-        patente: '',
-        tel: '',
-        marca: '',
-        modelo: '',
-    });
+    const [clienteA] = clienteActual;
+
+    const [cliente, guardarCliente] = useState(clienteA);
+
+    if (clienteActual === null) return null;
 
     const { nombre, patente, tel, marca, modelo } = cliente;
 
@@ -25,6 +23,7 @@ const NuevoCliente = () => {
             [e.target.name]: e.target.value
         })
     }
+
     const onSubmitForm = e => {
         e.preventDefault();
 
@@ -35,14 +34,8 @@ const NuevoCliente = () => {
         }
 
         //enviar los datos al action
-        agregarCliente(cliente);
-        guardarCliente({
-            nombre: '',
-            patente: '',
-            tel: '',
-            marca: '',
-            modelo: '',
-        });
+        actualizarCliente(cliente);
+        obtenerClienteActual(cliente.id);
     }
 
     const cerrarPopup = () => {
@@ -54,7 +47,7 @@ const NuevoCliente = () => {
             <Fondo onClick={cerrarPopup}></Fondo>
             <Container>
                 <DivClientes>
-                    <Titulo>Agregar nuevo cliente</Titulo>
+                    <Titulo>Editar cliente</Titulo>
                     <Formulario
                         onSubmit={onSubmitForm}
                     >
@@ -121,7 +114,7 @@ const NuevoCliente = () => {
                             <BtnEnviar
                                 type='submit'
                             >
-                                Agregar cliente
+                                Actualizar cliente
                             </BtnEnviar>
                             <BtnCancelar
                                 type='button'
@@ -138,7 +131,7 @@ const NuevoCliente = () => {
     );
 };
 
-export default NuevoCliente;
+export default EditarCliente;
 
 const Fondo = styled.div`
     position:absolute;

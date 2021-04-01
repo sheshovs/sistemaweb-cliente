@@ -10,7 +10,6 @@ const ListadoClientes = () => {
     const clientesContext = useContext(clienteContext);
     const { clientes, obtenerClientes } = clientesContext;
 
-    console.log(clientes);
     useEffect(() => {
 
         obtenerClientes();
