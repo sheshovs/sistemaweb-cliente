@@ -9,21 +9,21 @@ import {
     FILTRAR_CLIENTES,
     MOSTRAR_AGREGAR_CLIENTE,
     CLIENTE_ACTUAL,
-    ACTUALIZAR_CLIENTE
+    ACTUALIZAR_CLIENTE,
+    ELIMINAR_CLIENTE
 } from '../../types/index';
 
 
 const ClienteState = (props) => {
 
-    const clientes = [
-        { id: uuidv4(), nombre: 'Santos Hermoso', patente: 'DH3487', tel: '9876 5434', marca: 'Audi', modelo: 'R8' },
-        { id: uuidv4(), nombre: 'Latifa Cabello', patente: 'KU2948', tel: '8642 7568' },
-        { id: uuidv4(), nombre: 'Adan Vera', patente: 'KOFT34', tel: '9362 3610' },
-        { id: uuidv4(), nombre: 'Yoel Conesa', patente: 'NA2843', tel: '8315 3697' },
-        { id: uuidv4(), nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
-    ]
-
     const initialState = {
+        allClientes: [
+            { id: 1, nombre: 'Santos Hermoso', patente: 'DH3487', tel: '9876 5434', marca: 'Audi', modelo: 'R8' },
+            { id: 2, nombre: 'Latifa Cabello', patente: 'KU2948', tel: '8642 7568' },
+            { id: 3, nombre: 'Adan Vera', patente: 'KOFT34', tel: '9362 3610' },
+            { id: 4, nombre: 'Yoel Conesa', patente: 'NA2843', tel: '8315 3697' },
+            { id: 5, nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
+        ],
         clientes: [],
         popup: false,
         clienteActual: null
@@ -35,7 +35,6 @@ const ClienteState = (props) => {
     const obtenerClientes = () => {
         dispatch({
             type: OBTENER_CLIENTES,
-            payload: clientes
         })
     }
 
@@ -77,18 +76,27 @@ const ClienteState = (props) => {
         })
     }
 
+    const eliminarCliente = id => {
+        dispatch({
+            type: ELIMINAR_CLIENTE,
+            payload: id
+        })
+    }
+
     return (
         <clienteContext.Provider
             value={{
                 clientes: state.clientes,
                 popup: state.popup,
                 clienteActual: state.clienteActual,
+                clientesfiltrados: state.clientesfiltrados,
                 agregarCliente,
                 obtenerClientes,
                 filtrarClientes,
                 handleNuevoCliente,
                 obtenerClienteActual,
-                actualizarCliente
+                actualizarCliente,
+                eliminarCliente
             }}
         >
             {props.children}

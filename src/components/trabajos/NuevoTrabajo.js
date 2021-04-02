@@ -1,18 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import trabajoContext from '../context/trabajos/trabajoContext'
+import clienteContext from '../context/clientes/clienteContext'
 
 import styled from 'styled-components'
 
 const NuevoTrabajo = () => {
 
+    const clientesContext = useContext(clienteContext);
+    const { clienteActual } = clientesContext;
+
+    const [clienteA] = clienteActual;
+
+    const trabajosContext = useContext(trabajoContext);
+    const { trabajoActual, agregarTrabajo, editarTrabajo } = trabajosContext;
+
 
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
         kilometraje: '',
-        fecha: new Date().toISOString().slice(0, 10)
+        fecha: new Date().toISOString().slice(0, 10),
+        idCliente: clienteA.id
     });
 
-
     const { descripcion, kilometraje, fecha } = trabajo;
+
+    useEffect(() => {
+
+        if (trabajoActual) {
+            const [trabajoA] = trabajoActual;
+
+            guardarTrabajo({
+                id: trabajoA.id,
+                descripcion: trabajoA.descripcion,
+                kilometraje: trabajoA.kilometraje,
+                fecha: trabajoA.fecha,
+                idCliente: trabajoA.idCliente
+            });
+        }
+
+    }, [trabajoActual]);
+
 
     const onChange = e => {
         guardarTrabajo({
@@ -24,6 +51,24 @@ const NuevoTrabajo = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
+        if (descripcion.trim() === '' || kilometraje.trim() === '') {
+            return;
+        }
+
+        if (trabajoActual === null) {
+            agregarTrabajo(trabajo);
+
+        } else {
+            editarTrabajo(trabajo);
+        }
+
+
+        guardarTrabajo({
+            descripcion: '',
+            kilometraje: '',
+            fecha: new Date().toISOString().slice(0, 10),
+            idCliente: clienteA.id
+        });
     }
 
     return (
@@ -56,7 +101,7 @@ const NuevoTrabajo = () => {
             <BtnAgregar
                 type='submit'
             >
-                Agregar trabajo
+                {trabajoActual ? 'Editar trabajo' : 'Agregar trabajo'}
             </BtnAgregar>
         </FormTrabajos>
     );
@@ -69,7 +114,7 @@ const FormTrabajos = styled.form`
     display:flex;
     justify-content: flex-start;
     align-items:center;
-    margin-bottom:20px;
+    margin-bottom:30px;
 `;
 
 const Input = styled.input`

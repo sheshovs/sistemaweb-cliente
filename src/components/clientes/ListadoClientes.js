@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Cliente from './Cliente'
 import clienteContext from '../context/clientes/clienteContext'
 import styled from 'styled-components'
@@ -8,16 +8,7 @@ const ListadoClientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { clientes, obtenerClientes } = clientesContext;
-
-    useEffect(() => {
-
-        obtenerClientes();
-
-        // eslint-disable-next-line
-    }, []);
-
-    if (clientes.length === 0) return null;
+    const { clientes } = clientesContext;
 
     return (
         <TablaClientes>

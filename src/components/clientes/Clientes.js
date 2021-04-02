@@ -10,7 +10,7 @@ const Clientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { popup, filtrarClientes, obtenerClientes, handleNuevoCliente } = clientesContext;
+    const { clientes, popup, filtrarClientes, obtenerClientes, handleNuevoCliente } = clientesContext;
 
     const [filtro, guardarFiltro] = useState({
         patente: ''
@@ -63,7 +63,11 @@ const Clientes = () => {
                     </BtnNuevoCliente>
                 </DivBarraBtn>
 
-                <ListadoClientes />
+
+                {clientes.length === 0
+                    ? <Mensaje>No hay clientes, comienza agregando uno!</Mensaje>
+                    : <ListadoClientes />
+                }
             </DivClientes>
         </Container>
     );
@@ -148,4 +152,9 @@ const BtnNuevoCliente = styled.div`
     :hover{
         background-color:rgba(95,158,160,.9);
     }
+`;
+
+const Mensaje = styled.p`
+    font-size:32px;
+    font-weight:bold;
 `;

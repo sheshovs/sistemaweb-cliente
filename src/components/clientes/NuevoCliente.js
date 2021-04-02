@@ -7,7 +7,7 @@ const NuevoCliente = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { agregarCliente, handleNuevoCliente } = clientesContext;
+    const { agregarCliente, handleNuevoCliente, obtenerClientes } = clientesContext;
 
     const [cliente, guardarCliente] = useState({
         nombre: '',
@@ -36,6 +36,7 @@ const NuevoCliente = () => {
 
         //enviar los datos al action
         agregarCliente(cliente);
+        obtenerClientes();
         guardarCliente({
             nombre: '',
             patente: '',

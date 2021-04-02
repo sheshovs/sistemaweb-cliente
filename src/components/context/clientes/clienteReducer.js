@@ -4,7 +4,8 @@ import {
     FILTRAR_CLIENTES,
     MOSTRAR_AGREGAR_CLIENTE,
     CLIENTE_ACTUAL,
-    ACTUALIZAR_CLIENTE
+    ACTUALIZAR_CLIENTE,
+    ELIMINAR_CLIENTE
 } from '../../types/index';
 
 // eslint-disable-next-line
@@ -13,14 +14,15 @@ export default (state, action) => {
         case OBTENER_CLIENTES:
             return {
                 ...state,
-                clientes: action.payload
+                clientes: [...state.allClientes]
             }
         case AGREGAR_CLIENTE:
             return {
                 ...state,
-                clientes: [...state.clientes, action.payload],
+                allClientes: [...state.clientes, action.payload],
                 popup: false
             }
+
         case FILTRAR_CLIENTES:
             return {
                 ...state,
@@ -34,15 +36,19 @@ export default (state, action) => {
         case CLIENTE_ACTUAL:
             return {
                 ...state,
-                clienteActual: state.clientes.filter(cliente => cliente.id === action.payload)
+                clienteActual: state.allClientes.filter(cliente => cliente.id === action.payload)
             }
         case ACTUALIZAR_CLIENTE:
             return {
                 ...state,
-                clientes: state.clientes.map(cliente => (cliente.id === action.payload.id) ? action.payload : cliente),
+                allClientes: state.clientes.map(cliente => (cliente.id === action.payload.id) ? action.payload : cliente),
                 popup: false
             }
-
+        case ELIMINAR_CLIENTE:
+            return {
+                ...state,
+                allClientes: state.clientes.filter(cliente => (cliente.id !== action.payload))
+            }
         default:
             return state;
     }
