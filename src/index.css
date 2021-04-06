@@ -33,10 +33,10 @@ code {
 }
 .volver{
   text-decoration: none;
-  color: #666;
+  color: #666666;
   font-weight: bold;
   font-size: 20px;
 }
 .volver:hover{
-  color:#222;
+  color:#222222;
 }
