@@ -7,6 +7,7 @@ import Trabajos from './components/trabajos/Trabajos'
 
 import ClienteState from './components/context/clientes/clienteState';
 import TrabajoState from './components/context/trabajos/trabajoState';
+import AlertaState from './components/context/alertas/alertaState';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -14,15 +15,17 @@ function App() {
   return (
     <ClienteState>
       <TrabajoState>
-        <Router>
-          <Switch>
-            <Route exact path={'/'} component={Login} />
-            <Route exact path={'/nueva-cuenta'} component={NuevaCuenta} />
-            <Route exact path={'/clientes'} component={Clientes} />
-            <Route exact path={'/nuevo-cliente'} component={NuevoCliente} />
-            <Route exact path={'/cliente/trabajos'} component={Trabajos} />
-          </Switch>
-        </Router>
+        <AlertaState>
+          <Router>
+            <Switch>
+              <Route exact path={'/'} component={Login} />
+              <Route exact path={'/nueva-cuenta'} component={NuevaCuenta} />
+              <Route exact path={'/clientes'} component={Clientes} />
+              <Route exact path={'/nuevo-cliente'} component={NuevoCliente} />
+              <Route exact path={'/cliente/trabajos'} component={Trabajos} />
+            </Switch>
+          </Router>
+        </AlertaState>
       </TrabajoState>
     </ClienteState>
   );

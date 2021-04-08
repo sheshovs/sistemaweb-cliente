@@ -1,11 +1,53 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import alertaContext from '../context/alertas/alertaContext'
 
 const NuevaCuenta = () => {
 
+    //extraer los valores del context
+    const alertasContext = useContext(alertaContext);
+    const { alerta, mostrarAlerta } = alertasContext;
+
+    const [usuario, guardarUsuario] = useState({
+        nombre: '',
+        email: '',
+        password: '',
+        confirmar: ''
+    });
+
+    const { nombre, email, password, confirmar } = usuario;
+
+    const onChange = e => {
+        guardarUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        })
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
+
+        // validar que no haya campos vacios
+        if (nombre.trim() === '' || email.trim() === '' || password.trim() === '' ||
+            confirmar.trim() === '') {
+            mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+            return;
+        }
+
+        // password minimo de 6 caracteres
+        if (password.length < 6) {
+            mostrarAlerta('La contraseña debe ser de al menos 6 caracteres', 'alerta-error');
+            return;
+        }
+
+        // los 2 passwords son iguales
+        if (password !== confirmar) {
+            mostrarAlerta('Las contraseñas no coinciden', 'alerta-error');
+            return;
+        }
+
+        // pasarlo al action
 
     }
 
@@ -15,6 +57,7 @@ const NuevaCuenta = () => {
             <DivIzquierdo>
             </DivIzquierdo>
             <DivDerecho>
+                {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
                 <BoxForm>
                     <Titulo>Registro</Titulo>
                     <Formulario
@@ -31,6 +74,8 @@ const NuevaCuenta = () => {
                                 id='nombre'
                                 name='nombre'
                                 placeholder='Juanito Pérez'
+                                onChange={onChange}
+                                value={nombre}
                             />
                         </GroupForm>
                         <GroupForm>
@@ -44,6 +89,8 @@ const NuevaCuenta = () => {
                                 id='email'
                                 name='email'
                                 placeholder='correo@correo.com'
+                                onChange={onChange}
+                                value={email}
                             />
                         </GroupForm>
                         <GroupForm>
@@ -57,6 +104,8 @@ const NuevaCuenta = () => {
                                 id='password'
                                 name='password'
                                 placeholder='******'
+                                onChange={onChange}
+                                value={password}
                             />
                         </GroupForm>
                         <GroupForm>
@@ -66,10 +115,12 @@ const NuevaCuenta = () => {
                                 Confirmar Contraseña
                             </Label>
                             <Input
-                                type='confirmar'
+                                type='password'
                                 id='confirmar'
                                 name='confirmar'
                                 placeholder='******'
+                                onChange={onChange}
+                                value={confirmar}
                             />
                         </GroupForm>
                         <BtnEnviar

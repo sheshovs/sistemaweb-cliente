@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Login = () => {
+
+    const [usuario, guardarUsuario] = useState({
+        email: '',
+        password: ''
+    });
+
+    const { email, password } = usuario;
+
+    const onChange = e => {
+        guardarUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -28,6 +42,8 @@ const Login = () => {
                                 id='email'
                                 name='email'
                                 placeholder='correo@correo.com'
+                                onChange={onChange}
+                                value={email}
                             />
                         </GroupForm>
                         <GroupForm>
@@ -39,6 +55,8 @@ const Login = () => {
                                 id='password'
                                 name='password'
                                 placeholder='******'
+                                onChange={onChange}
+                                value={password}
                             />
                         </GroupForm>
                         <BtnEnviar
