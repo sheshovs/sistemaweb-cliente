@@ -1,13 +1,28 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import alertaContext from '../context/alertas/alertaContext'
+import AuthContext from '../context/autenticacion/authContext'
 
-const NuevaCuenta = () => {
+const NuevaCuenta = (props) => {
 
     //extraer los valores del context
     const alertasContext = useContext(alertaContext);
     const { alerta, mostrarAlerta } = alertasContext;
+
+    const authContext = useContext(AuthContext);
+    const { mensaje, autenticado, registrarUsuario } = authContext;
+
+    // en caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
+    useEffect(() => {
+        if (autenticado) {
+            props.history.push('/clientes');
+        }
+        if (mensaje) {
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+
+    }, [mensaje, autenticado, props.history]);
 
     const [usuario, guardarUsuario] = useState({
         nombre: '',
@@ -48,7 +63,11 @@ const NuevaCuenta = () => {
         }
 
         // pasarlo al action
-
+        registrarUsuario({
+            nombre,
+            email,
+            password
+        });
     }
 
 
@@ -59,7 +78,7 @@ const NuevaCuenta = () => {
             <DivDerecho>
                 {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
                 <BoxForm>
-                    <Titulo>Registro</Titulo>
+                    <Titulo>Obtener una cuenta</Titulo>
                     <Formulario
                         onSubmit={handleSubmit}
                     >
@@ -171,6 +190,7 @@ const BoxForm = styled.div`
 const Titulo = styled.h1`
     font-size:40px;
     margin-bottom:30px;
+    font-family: 'Raleway', sans-serif;
 `;
 
 const Formulario = styled.form`

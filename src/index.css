@@ -29,7 +29,7 @@ code {
   font-size: 20px;
 }
 .enlace:hover{
-  text-decoration: underline;
+  text-shadow: 0 0 10px rgba(255,255,255,.5);
 }
 
 .btnTrabajos{

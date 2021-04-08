@@ -17,7 +17,7 @@ const Trabajos = () => {
 
     const trabajosContext = useContext(trabajoContext);
     const { trabajoscliente } = trabajosContext;
-    console.log(trabajoscliente);
+
 
     if (clienteActual === null) return <Redirect to='/clientes' />;
 

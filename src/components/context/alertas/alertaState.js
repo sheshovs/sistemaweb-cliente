@@ -1,4 +1,4 @@
-import React, { Children, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import alertaReducer from './alertaReducer';
 import alertaContext from './alertaContext';
 

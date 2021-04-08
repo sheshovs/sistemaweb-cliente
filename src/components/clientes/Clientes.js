@@ -4,9 +4,14 @@ import NuevoCliente from './NuevoCliente'
 import ListadoClientes from './ListadoClientes'
 import clienteContext from '../context/clientes/clienteContext'
 import styled from 'styled-components'
+import AuthContext from '../context/autenticacion/authContext';
 
 
 const Clientes = () => {
+
+    // Extaer la informacion de la autenticacion
+    const authContext = useContext(AuthContext);
+    const { usuarioAutenticado } = authContext;
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
@@ -17,6 +22,10 @@ const Clientes = () => {
     });
 
     const { patente } = filtro;
+
+    useEffect(() => {
+        usuarioAutenticado();
+    }, []);
 
     useEffect(() => {
 

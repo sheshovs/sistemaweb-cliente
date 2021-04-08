@@ -1,8 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import alertaContext from '../context/alertas/alertaContext'
+import AuthContext from '../context/autenticacion/authContext'
 
-const Login = () => {
+const Login = props => {
+
+    //extraer los valores del context
+    const alertasContext = useContext(alertaContext);
+    const { alerta, mostrarAlerta } = alertasContext;
+
+    const authContext = useContext(AuthContext);
+    const { mensaje, autenticado, iniciarSesion } = authContext;
+
+    useEffect(() => {
+        if (autenticado) {
+            props.history.push('/clientes');
+        }
+
+        if (mensaje) {
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+
+    }, [mensaje, autenticado, props.history]);
 
     const [usuario, guardarUsuario] = useState({
         email: '',
@@ -21,6 +41,14 @@ const Login = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
+        //validar que no haya campos vacios
+        if (email.trim() === '' || password.trim() === '') {
+            mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+            return;
+        }
+
+        //pasarlo al action
+        iniciarSesion({ email, password });
     }
 
     return (
@@ -28,6 +56,7 @@ const Login = () => {
             <DivIzquierdo>
             </DivIzquierdo>
             <DivDerecho>
+                {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
                 <BoxForm>
                     <Titulo>Iniciar Sesión</Titulo>
                     <Formulario
@@ -107,6 +136,7 @@ const BoxForm = styled.div`
 const Titulo = styled.h1`
     font-size:40px;
     margin-bottom:30px;
+    font-family: 'Raleway', sans-serif;
 `;
 
 const Formulario = styled.form`
