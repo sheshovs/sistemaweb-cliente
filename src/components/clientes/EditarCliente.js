@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 import clienteContext from '../context/clientes/clienteContext'
+import AlertaContext from '../context/alertas/alertaContext';
 import styled from 'styled-components'
 
 const EditarCliente = () => {
@@ -7,11 +8,22 @@ const EditarCliente = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { clienteActual, handleNuevoCliente, obtenerClienteActual, actualizarCliente } = clientesContext;
+    const { mensaje, clienteActual, handleNuevoCliente, obtenerClienteActual, actualizarCliente } = clientesContext;
+
+    const alertaContext = useContext(AlertaContext);
+    const { alerta, mostrarAlerta } = alertaContext;
 
     const [clienteA] = clienteActual;
 
     const [cliente, guardarCliente] = useState(clienteA);
+
+    useEffect(() => {
+        // si hay un error
+        if (mensaje) {
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+        // eslint-disable-next-line
+    }, [mensaje])
 
     if (clienteActual === null) return null;
 
@@ -28,14 +40,16 @@ const EditarCliente = () => {
         e.preventDefault();
 
         //validar campos vacios
-        if (nombre.trim() === '' || patente.trim() === '' || tel.trim() === '' ||
-            marca.trim() === '' || modelo.trim() === '') {
+        if (nombre.trim() === '' || patente.trim() === '' || tel.trim() === '') {
             return;
         }
 
         //enviar los datos al action
         actualizarCliente(cliente);
-        obtenerClienteActual(cliente.id);
+        setTimeout(() => {
+            obtenerClienteActual(cliente._id);
+        }, 500);
+
     }
 
     const cerrarPopup = () => {
@@ -44,7 +58,8 @@ const EditarCliente = () => {
 
     return (
         <Fragment>
-            <Fondo onClick={cerrarPopup}></Fondo>
+            <Fondo onClick={cerrarPopup}>{alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}</Fondo>
+
             <Container>
                 <DivClientes>
                     <Titulo>Editar cliente</Titulo>

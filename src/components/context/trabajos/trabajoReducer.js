@@ -12,7 +12,7 @@ export default (state, action) => {
         case OBTENER_TRABAJOS:
             return {
                 ...state,
-                trabajoscliente: state.trabajos.filter(trabajo => trabajo.idCliente === action.payload)
+                trabajoscliente: action.payload
             }
         case AGREGAR_TRABAJO:
             return {
@@ -22,18 +22,18 @@ export default (state, action) => {
         case ELIMINAR_TRABAJO:
             return {
                 ...state,
-                trabajoscliente: state.trabajoscliente.filter(trabajo => (trabajo.id !== action.payload)),
+                trabajoscliente: state.trabajoscliente.filter(trabajo => (trabajo._id !== action.payload)),
                 trabajoActual: null
             }
         case TRABAJO_ACTUAL:
             return {
                 ...state,
-                trabajoActual: state.trabajoscliente.filter(trabajo => (trabajo.id === action.payload))
+                trabajoActual: state.trabajoscliente.filter(trabajo => (trabajo._id === action.payload))
             }
         case EDITAR_TRABAJO:
             return {
                 ...state,
-                trabajoscliente: state.trabajoscliente.map(trabajo => (trabajo.id === action.payload.id) ? action.payload : trabajo),
+                trabajoscliente: state.trabajoscliente.map(trabajo => (trabajo._id === action.payload._id) ? action.payload : trabajo),
                 trabajoActual: null
             }
 

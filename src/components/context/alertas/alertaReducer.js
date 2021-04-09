@@ -3,6 +3,7 @@ import {
     OCULTAR_ALERTA
 } from '../../types/index';
 
+// eslint-disable-next-line
 export default (state, action) => {
     switch (action.type) {
         case MOSTRAR_ALERTA:

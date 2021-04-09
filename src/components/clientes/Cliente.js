@@ -9,7 +9,7 @@ const Cliente = ({ cliente }) => {
     const clientesContext = useContext(clienteContext);
     const { obtenerClienteActual } = clientesContext;
 
-    const { nombre, patente, tel, id } = cliente;
+    const { nombre, patente, tel, _id } = cliente;
 
     const trabajosContext = useContext(trabajoContext);
     const { obtenerTrabajos } = trabajosContext;
@@ -23,8 +23,8 @@ const Cliente = ({ cliente }) => {
             <TD>
                 <BtnTrabajos
                     onClick={() => {
-                        obtenerClienteActual(id);
-                        obtenerTrabajos(id);
+                        obtenerClienteActual(_id);
+                        obtenerTrabajos(_id);
                     }}
                 >
                     <Link to={'/cliente/trabajos'} className='btnTrabajos'>Ver trabajos</Link>

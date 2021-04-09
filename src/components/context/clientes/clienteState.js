@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import clienteContext from './clienteContext';
 import clienteReducer from './clienteReducer';
@@ -10,41 +9,71 @@ import {
     MOSTRAR_AGREGAR_CLIENTE,
     CLIENTE_ACTUAL,
     ACTUALIZAR_CLIENTE,
-    ELIMINAR_CLIENTE
+    ELIMINAR_CLIENTE,
+    CLIENTE_ERROR
 } from '../../types/index';
+
+import clienteAxios from '../../../config/axios';
 
 
 const ClienteState = (props) => {
 
     const initialState = {
-        allClientes: [
-            { id: 1, nombre: 'Santos Hermoso', patente: 'DH3487', tel: '9876 5434', marca: 'Audi', modelo: 'R8' },
-            { id: 2, nombre: 'Latifa Cabello', patente: 'KU2948', tel: '8642 7568' },
-            { id: 3, nombre: 'Adan Vera', patente: 'KOFT34', tel: '9362 3610' },
-            { id: 4, nombre: 'Yoel Conesa', patente: 'NA2843', tel: '8315 3697' },
-            { id: 5, nombre: 'Alexandre Ramon', patente: 'MYFO09', tel: '9845 4835' },
-        ],
         clientes: [],
+        filtrados: [],
         popup: false,
-        clienteActual: null
+        clienteActual: null,
+        mensaje: null
     }
 
     // Dispatch para ejecutar las acciones
     const [state, dispatch] = useReducer(clienteReducer, initialState);
 
-    const obtenerClientes = () => {
-        dispatch({
-            type: OBTENER_CLIENTES,
-        })
+    const obtenerClientes = async () => {
+
+        try {
+            const resultado = await clienteAxios.get('/api/clientes');
+
+            dispatch({
+                type: OBTENER_CLIENTES,
+                payload: resultado.data.clientes
+            })
+
+        } catch (error) {
+            const alerta = {
+                msg: 'Hubo un error al obtener clientes',
+                categoria: 'alerta-error'
+            }
+
+            dispatch({
+                type: CLIENTE_ERROR,
+                payload: alerta
+            })
+        }
     }
 
-    const agregarCliente = cliente => {
-        cliente.id = uuidv4();
+    const agregarCliente = async cliente => {
+        try {
+            const resultado = await clienteAxios.post('/api/clientes', cliente);
+            // console.log(resultado);
 
-        dispatch({
-            type: AGREGAR_CLIENTE,
-            payload: cliente
-        })
+            dispatch({
+                type: AGREGAR_CLIENTE,
+                payload: resultado.data
+            })
+        } catch (error) {
+            const alerta = {
+                msg: 'Hubo un error al agregar el cliente',
+                categoria: 'alerta-error'
+            }
+
+            dispatch({
+                type: CLIENTE_ERROR,
+                payload: alerta
+            })
+
+        }
+
     }
 
     const filtrarClientes = patente => {
@@ -53,6 +82,7 @@ const ClienteState = (props) => {
             type: FILTRAR_CLIENTES,
             payload: patente
         })
+
     }
 
     const handleNuevoCliente = (estado) => {
@@ -63,33 +93,65 @@ const ClienteState = (props) => {
     }
 
     const obtenerClienteActual = (clienteId) => {
+
         dispatch({
             type: CLIENTE_ACTUAL,
             payload: clienteId
         })
     }
 
-    const actualizarCliente = (cliente) => {
-        dispatch({
-            type: ACTUALIZAR_CLIENTE,
-            payload: cliente
-        })
+    const actualizarCliente = async (cliente) => {
+        try {
+            const resultado = await clienteAxios.put(`/api/clientes/${cliente._id}`, cliente);
+            // console.log(resultado.data.cliente);
+
+            dispatch({
+                type: ACTUALIZAR_CLIENTE,
+                payload: resultado.data.cliente
+            })
+        } catch (error) {
+            const alerta = {
+                msg: 'Hubo un error al actualizar el cliente',
+                categoria: 'alerta-error'
+            }
+
+            dispatch({
+                type: CLIENTE_ERROR,
+                payload: alerta
+            })
+        }
     }
 
-    const eliminarCliente = id => {
-        dispatch({
-            type: ELIMINAR_CLIENTE,
-            payload: id
-        })
+    const eliminarCliente = async id => {
+        try {
+            await clienteAxios.delete(`/api/clientes/${id}`);
+
+            dispatch({
+                type: ELIMINAR_CLIENTE,
+                payload: id
+            })
+
+        } catch (error) {
+            const alerta = {
+                msg: 'Hubo un error al eliminar el cliente',
+                categoria: 'alerta-error'
+            }
+
+            dispatch({
+                type: CLIENTE_ERROR,
+                payload: alerta
+            })
+        }
     }
 
     return (
         <clienteContext.Provider
             value={{
                 clientes: state.clientes,
+                filtrados: state.filtrados,
                 popup: state.popup,
                 clienteActual: state.clienteActual,
-                clientesfiltrados: state.clientesfiltrados,
+                mensaje: state.mensaje,
                 agregarCliente,
                 obtenerClientes,
                 filtrarClientes,

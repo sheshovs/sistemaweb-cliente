@@ -25,12 +25,12 @@ const AlertaState = props => {
             }
         });
 
-        // despues de 5 segundos limpia la alerta
+        // despues de 3 segundos limpia la alerta
         setTimeout(() => {
             dispatch({
                 type: OCULTAR_ALERTA
             })
-        }, 5000);
+        }, 3000);
     }
 
     return (

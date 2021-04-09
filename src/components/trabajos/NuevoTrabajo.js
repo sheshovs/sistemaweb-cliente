@@ -12,15 +12,16 @@ const NuevoTrabajo = () => {
     const [clienteA] = clienteActual;
 
     const trabajosContext = useContext(trabajoContext);
-    const { trabajoActual, agregarTrabajo, editarTrabajo } = trabajosContext;
+    const { trabajoActual, agregarTrabajo, editarTrabajo, obtenerTrabajos } = trabajosContext;
 
 
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
         kilometraje: '',
         fecha: new Date().toISOString().slice(0, 10),
-        idCliente: clienteA.id
+        cliente: clienteA._id
     });
+
 
     const { descripcion, kilometraje, fecha } = trabajo;
 
@@ -30,11 +31,11 @@ const NuevoTrabajo = () => {
             const [trabajoA] = trabajoActual;
 
             guardarTrabajo({
-                id: trabajoA.id,
+                _id: trabajoA._id,
                 descripcion: trabajoA.descripcion,
                 kilometraje: trabajoA.kilometraje,
-                fecha: trabajoA.fecha,
-                idCliente: trabajoA.idCliente
+                fecha: trabajoA.fecha.slice(0, 10),
+                cliente: trabajoA.cliente
             });
         }
 
@@ -67,8 +68,11 @@ const NuevoTrabajo = () => {
             descripcion: '',
             kilometraje: '',
             fecha: new Date().toISOString().slice(0, 10),
-            idCliente: clienteA.id
+            cliente: clienteA._id
         });
+        setTimeout(() => {
+            obtenerTrabajos(clienteA._id);
+        }, 500);
     }
 
     return (

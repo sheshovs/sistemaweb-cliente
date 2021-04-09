@@ -18,12 +18,11 @@ const Trabajos = () => {
     const trabajosContext = useContext(trabajoContext);
     const { trabajoscliente } = trabajosContext;
 
-
     if (clienteActual === null) return <Redirect to='/clientes' />;
 
     const [cliente] = clienteActual;
 
-    const { id, nombre, patente, tel, marca, modelo } = cliente;
+    const { _id, nombre, patente, tel, marca, modelo } = cliente;
 
 
 
@@ -34,6 +33,7 @@ const Trabajos = () => {
     return (
         <Container>
             {popup ? <EditarCliente /> : null}
+
             <Sidebar />
             <DivTrabajos>
                 <BtnVolver>
@@ -46,7 +46,7 @@ const Trabajos = () => {
                             onClick={mostrarPopup}
                         >Editar</BtnNuevoCliente>
                         <BtnEliminar
-                            onClick={() => (eliminarCliente(id))}
+                            onClick={() => (eliminarCliente(_id))}
                         >
                             <Link to={'/clientes'} className='enlace' >Eliminar</Link>
                         </BtnEliminar>

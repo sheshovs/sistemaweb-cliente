@@ -15,7 +15,7 @@ const Clientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { clientes, popup, filtrarClientes, obtenerClientes, handleNuevoCliente } = clientesContext;
+    const { popup, filtrarClientes, handleNuevoCliente } = clientesContext;
 
     const [filtro, guardarFiltro] = useState({
         patente: ''
@@ -25,11 +25,11 @@ const Clientes = () => {
 
     useEffect(() => {
         usuarioAutenticado();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
 
-        obtenerClientes();
         filtrarClientes(patente);
 
         // eslint-disable-next-line
@@ -73,10 +73,8 @@ const Clientes = () => {
                 </DivBarraBtn>
 
 
-                {clientes.length === 0
-                    ? <Mensaje>No hay clientes, comienza agregando uno!</Mensaje>
-                    : <ListadoClientes />
-                }
+                <ListadoClientes />
+
             </DivClientes>
         </Container>
     );
@@ -163,7 +161,3 @@ const BtnNuevoCliente = styled.div`
     }
 `;
 
-const Mensaje = styled.p`
-    font-size:32px;
-    font-weight:bold;
-`;

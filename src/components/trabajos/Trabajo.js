@@ -1,20 +1,27 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components'
 import trabajoContext from '../context/trabajos/trabajoContext'
+import clienteContext from '../context/clientes/clienteContext'
 
 const Trabajo = ({ trabajo }) => {
 
     const trabajosContext = useContext(trabajoContext);
-    const { eliminarTrabajo, obtenerTrabajoActual } = trabajosContext;
+    const { eliminarTrabajo, obtenerTrabajoActual, obtenerTrabajos } = trabajosContext;
+
+    const clientesContext = useContext(clienteContext);
+    const { clienteActual } = clientesContext;
+
+    const [cliente] = clienteActual;
 
     const { descripcion, kilometraje, fecha } = trabajo;
 
     const selectTrabajo = () => {
-        obtenerTrabajoActual(trabajo.id);
+        obtenerTrabajoActual(trabajo._id);
     }
 
     const deleteTrabajo = () => {
-        eliminarTrabajo(trabajo.id);
+        eliminarTrabajo(trabajo._id, cliente._id);
+        obtenerTrabajos(cliente._id);
     }
 
     return (

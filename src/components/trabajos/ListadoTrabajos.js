@@ -19,7 +19,7 @@ const ListadoTrabajos = () => {
             {trabajoscliente.map(trabajo => (
 
                 <Trabajo
-                    key={trabajo.id}
+                    key={trabajo._id}
                     trabajo={trabajo}
                 />
             ))}
