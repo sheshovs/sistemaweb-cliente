@@ -12,7 +12,7 @@ const ListadoTrabajos = () => {
         <Container>
             <DivHead>
                 <DivInfo><strong>Descripción</strong></DivInfo>
-                <DivInfo><strong>Kilometraje</strong></DivInfo>
+                <DivInfo><strong>Km</strong></DivInfo>
                 <DivInfo><strong>Fecha</strong></DivInfo>
                 <DivAcciones><strong>Acciones</strong></DivAcciones>
             </DivHead>
@@ -31,7 +31,7 @@ const ListadoTrabajos = () => {
 export default ListadoTrabajos;
 
 const Container = styled.div`
-    width:80%;
+    width:100%;
 `;
 const DivHead = styled.div`
     width: 100%;
@@ -57,6 +57,10 @@ const DivInfo = styled.p`
     }
     :nth-child(3){
         width:20%;
+    }
+
+    @media (max-width:675px){
+        padding:10px 5px;
     }
 `;
 

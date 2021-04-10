@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Sidebar from '../layout/Sidebar'
+import Nav from '../layout/Nav'
 import NuevoCliente from './NuevoCliente'
 import ListadoClientes from './ListadoClientes'
 import clienteContext from '../context/clientes/clienteContext'
@@ -22,6 +23,34 @@ const Clientes = () => {
     });
 
     const { patente } = filtro;
+
+    const size = useWindowSize();
+
+    function useWindowSize() {
+        // Initialize state with undefined width/height so server and client renders match
+        // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+        const [windowSize, setWindowSize] = useState({
+            width: undefined,
+            height: undefined,
+        });
+        useEffect(() => {
+            // Handler to call on window resize
+            function handleResize() {
+                // Set window width/height to state
+                setWindowSize({
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                });
+            }
+            // Add event listener
+            window.addEventListener("resize", handleResize);
+            // Call handler right away so state gets updated with initial window size
+            handleResize();
+            // Remove event listener on cleanup
+            return () => window.removeEventListener("resize", handleResize);
+        }, []); // Empty array ensures that effect is only run on mount
+        return windowSize;
+    }
 
     useEffect(() => {
         usuarioAutenticado();
@@ -49,7 +78,7 @@ const Clientes = () => {
     return (
         <Container>
             {popup ? <NuevoCliente /> : null}
-            <Sidebar />
+            {window.innerWidth < 850 ? <Nav /> : <Sidebar />}
             <DivClientes>
                 <Titulo>Clientes</Titulo>
                 <DivBarraBtn>
@@ -68,7 +97,7 @@ const Clientes = () => {
                     <BtnNuevoCliente
                         onClick={mostrarPopup}
                     >
-                        Nuevo Cliente
+                        {size.width < 992 ? <i className="fas fa-user-plus"></i> : 'Nuevo Cliente'}
                     </BtnNuevoCliente>
                 </DivBarraBtn>
 
@@ -87,31 +116,62 @@ const Container = styled.div`
     min-height:100vh;
     display:flex;
     justify-content:flex-start;
+
+    @media (max-width:850px){
+        flex-direction:column;
+    }
 `;
 
 const DivClientes = styled.div`
-    width: calc(100% - 300px);
+    width: calc(100% - 250px);
     min-height:100vh;
     padding:50px;
-    margin-left:300px;
+    margin-left:250px;
+
+    @media (max-width:850px){
+        margin-left:0;
+        width:100%;
+        padding:20px 50px;
+    }
+
+    @media (max-width:435px){
+        padding:20px;
+    }
 `;
 
 const Titulo = styled.h1`
     margin-bottom:50px;
+
+    @media (max-width:850px){
+        margin-bottom:20px;
+    }
 `;
 
 const DivBarraBtn = styled.div`
-    width:80%;
+    width:90%;
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:40px;
+
+    @media (max-width:1300px){
+        width:100%;
+    }
+
+    @media (max-width:575px){
+        flex-direction:column;
+    }
 `;
 
 const Busqueda = styled.div`
     display:flex;
     justify-content:flex-start;
     align-items:center;
+
+    @media (max-width:575px){
+        width:100%;
+        margin-bottom:20px;
+    }
 `;
 
 const Input = styled.input`
@@ -126,6 +186,26 @@ const Input = styled.input`
     :focus{
         outline:none;
         border:1px solid rgba(0,0,0,1);
+    }
+
+    @media (max-width:1300px){
+        width:300px;
+    }
+
+    @media (max-width:992px){
+        width:250px;
+    }
+
+    @media (max-width:850px){
+        width:350px;
+    }
+
+    @media (max-width:675px){
+        width:250px;
+    }
+
+    @media (max-width:575px){
+        width: calc(100% - 80px);
     }
 `;
 
@@ -158,6 +238,16 @@ const BtnNuevoCliente = styled.div`
 
     :hover{
         background-color:rgba(95,158,160,.9);
+    }
+
+    @media (max-width:992px){
+        width:100px;
+    }
+    @media (max-width:575px){
+        width:250px;
+    }
+    @media (max-width:435px){
+        width:100%;
     }
 `;
 

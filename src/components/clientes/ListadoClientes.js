@@ -91,8 +91,13 @@ const ListadoClientes = () => {
 export default ListadoClientes;
 
 const TablaClientes = styled.table`
-    width:80%;
+    width:90%;
     border-collapse: collapse;
+
+    @media (max-width:1300px){
+        width:100%;
+    }
+
 `;
 
 const THead = styled.th`

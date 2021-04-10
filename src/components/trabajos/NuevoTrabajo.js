@@ -89,7 +89,7 @@ const NuevoTrabajo = () => {
             />
             <Input
                 type='text'
-                placeholder='Ingrese kilometraje'
+                placeholder='Kilometraje'
                 name='kilometraje'
                 id='kilometraje'
                 onChange={onChange}
@@ -105,7 +105,15 @@ const NuevoTrabajo = () => {
             <BtnAgregar
                 type='submit'
             >
-                {trabajoActual ? 'Editar trabajo' : 'Agregar trabajo'}
+                {trabajoActual
+                    ? (window.innerWidth < 1300
+                        ? <i className="fas fa-edit"></i>
+                        : ('Editar trabajo'))
+
+                    : (window.innerWidth < 1300
+                        ? <i className="fas fa-plus"></i>
+                        : ('Agregar trabajo'))}
+
             </BtnAgregar>
         </FormTrabajos>
     );
@@ -119,10 +127,19 @@ const FormTrabajos = styled.form`
     justify-content: flex-start;
     align-items:center;
     margin-bottom:30px;
+
+    @media (max-width:675px){
+        flex-wrap:wrap;
+        justify-content:space-around;
+    }
+
+    @media (max-width:500px){
+        justify-content:space-between;
+    }
 `;
 
 const Input = styled.input`
-    width:500px;
+    width:45%;
     height:50px;
     border:none;
     border:1px solid rgba(0,0,0,.3);
@@ -136,15 +153,42 @@ const Input = styled.input`
     }
 
     :nth-child(2){
-        width:160px;
+        width:20%;
     }
     :nth-child(3){
-        width:160px;
+        width:200px;
+    }
+
+    @media (max-width:1080px){
+        width:55%;
+    }
+
+    @media (max-width:675px){
+        margin-right:0;
+        margin-bottom:10px;
+        width:90%;
+
+        :nth-child(2){
+            width:40%;
+        }
+        :nth-child(3){
+            width:40%;
+        }
+    }
+
+    @media (max-width:500px){
+        width:100%;
+        :nth-child(2){
+            width:48%;
+        }
+        :nth-child(3){
+            width:48%;
+        }
     }
 `;
 
 const BtnAgregar = styled.button`
-    width:170px;
+    width:20%;
     height:50px;
     display:flex;
     justify-content:center;
@@ -158,5 +202,17 @@ const BtnAgregar = styled.button`
 
     :hover{
         background-color:rgba(95,158,160,.9);
+    }
+
+    @media (max-width:1080px){
+        width:10%;
+    }
+
+    @media (max-width:675px){
+        width:90%;
+    }
+
+    @media (max-width:500px){
+        width:100%;
     }
 `;

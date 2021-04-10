@@ -165,6 +165,10 @@ const Container = styled.div`
     left:50%;
     transform:translate(-50%,-50%);
     z-index:3;
+
+    @media (max-width:768px){
+        transform:translate(-50%,-50%);
+    }
 `;
 
 const DivClientes = styled.div`
@@ -176,10 +180,20 @@ const DivClientes = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+
+    @media (max-width:768px){
+        overflow-y:scroll;
+        padding:30px;
+    }
 `;
 
 const Titulo = styled.h1`
     margin-bottom:50px;
+
+    @media (max-width:768px){
+        margin-bottom:10px;
+        text-align:center;
+    }
 `;
 
 const Formulario = styled.form`
@@ -187,12 +201,20 @@ const Formulario = styled.form`
     display: flex;
     flex-direction:column;
     align-items:center;
+
+    @media (max-width:768px){
+        align-items:center;
+    }
 `;
 const FormGroup = styled.div`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     margin-bottom:40px;
+
+    @media (max-width:768px){
+        margin-bottom:10px;
+    }
 `;
 
 const FormGroup2 = styled.div`
@@ -200,6 +222,11 @@ const FormGroup2 = styled.div`
     display:flex;
     justify-content:space-evenly;
     margin:0 20px;
+    
+    @media (max-width:768px){
+        flex-direction:column;
+        align-items:center;
+    }
 `;
 
 const Label = styled.label`
@@ -220,6 +247,19 @@ const Input = styled.input`
         outline:none;
         border:1px solid rgba(0,0,0,1);
     }
+
+    @media (max-width:1300px){
+        width:350px;
+    }
+    @media (max-width:992px){
+        width:250px;
+    }
+    @media (max-width:768px){
+        width:350px;
+    }
+    @media (max-width:485px){
+        width:250px;
+    }
 `;
 
 const BtnEnviar = styled.button`
@@ -238,6 +278,10 @@ const BtnEnviar = styled.button`
     :hover{
         background-color:rgba(95,158,160,.9);
     }
+
+    @media (max-width:768px){
+        margin-top:10px;
+    }
 `;
 
 const BtnCancelar = styled.button`
@@ -255,5 +299,9 @@ const BtnCancelar = styled.button`
 
     :hover{
         background-color:rgba(211, 73, 73 ,.9);
+    }
+
+    @media (max-width:768px){
+        margin-top:20px;
     }
 `;

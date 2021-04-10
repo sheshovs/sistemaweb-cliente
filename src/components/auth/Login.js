@@ -92,7 +92,7 @@ const Login = props => {
                             type='submit'
                         >Ingresar</BtnEnviar>
 
-                        <Link to={'/nueva-cuenta'}>
+                        <Link to={'/nueva-cuenta'} className='azul'>
                             Registrarse
                         </Link>
                     </Formulario>
@@ -114,6 +114,10 @@ const DivIzquierdo = styled.div`
     width:45%;
     min-height:100vh;
     background-color: cadetblue;
+
+    @media (max-width:768px){
+        width:0;
+    }
 `;
 const DivDerecho = styled.div`
     width:55%;
@@ -121,10 +125,15 @@ const DivDerecho = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+    background-color:#f0f0f0;
+
+    @media (max-width:768px){
+        width:100%;
+    }
 `;
 
 const BoxForm = styled.div`
-    width:50%;
+    width:60%;
     min-height:450px;
     border: 1px solid rgba(0,0,0,.3);
     border-radius:15px;
@@ -132,11 +141,31 @@ const BoxForm = styled.div`
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    background-color:#fff;
+    padding:10px;
+
+    @media (max-width:1080px){
+        width:80%;
+    }
+
+    @media (max-width:768px){
+        width:60%;
+    }
+
+    @media (max-width:575px){
+        width:80%;
+    }
 `;
 const Titulo = styled.h1`
     font-size:40px;
     margin-bottom:30px;
     font-family: 'Raleway', sans-serif;
+
+    @media (max-width:768px){
+        font-size:32px;
+        margin-bottom:15px;
+        text-align:center;
+    }
 `;
 
 const Formulario = styled.form`
@@ -146,6 +175,11 @@ const Formulario = styled.form`
     flex-direction:column;
     align-items:center;
     justify-content:space-around;
+
+    @media (max-width:1080px){
+        height:300px;
+    }
+
 `;
 
 const GroupForm = styled.div`
@@ -154,13 +188,25 @@ const GroupForm = styled.div`
     display:flex;
     justify-content: space-between;
     align-items:center;
+
+    @media (max-width:1080px){
+        height:70px;
+        flex-direction:column;
+        align-items:flex-start;
+        justify-content:space-around;
+    }
 `;
 
 const Label = styled.label`
     font-size:16px;
+    width:30%;
+
+    @media (max-width:1080px){
+        margin-bottom:10px;
+    }
 `;
 const Input = styled.input`
-    width:280px;
+    width:70%;
     height:100%;
     border:none;
     border:1px solid rgba(0,0,0,.3);
@@ -171,19 +217,29 @@ const Input = styled.input`
     :focus{
         outline:none;
     }
+
+    @media (max-width:1080px){
+        width:100%;
+    }
 `;
 
 const BtnEnviar = styled.button`
     width:100%;
-    height:40px;
+    height:50px;
     border:none;
     border:1px solid rgba(0,0,0,.3);
     border-radius:5px;
     cursor:pointer;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:16px;
+    font-weight:bold;
+    font-family:'Roboto', sans-serif;
+    background-color:cadetblue;
+    color:white;
     transition: all .2s ease;
 
     :hover{
-        background-color:cadetblue;
-        color:white;
+        background-color:rgb(122, 201, 204);
     }
 `;

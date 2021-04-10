@@ -32,8 +32,8 @@ const Sidebar = () => {
 export default Sidebar;
 
 const Container = styled.div`
-    padding: 20px 30px;
-    width:300px;
+    padding: 20px;
+    width:250px;
     min-height:100vh;
     background-color: cadetblue;
     display:flex;

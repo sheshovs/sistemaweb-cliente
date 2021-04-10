@@ -27,7 +27,9 @@ const Cliente = ({ cliente }) => {
                         obtenerTrabajos(_id);
                     }}
                 >
-                    <Link to={'/cliente/trabajos'} className='btnTrabajos'>Ver trabajos</Link>
+                    <Link to={'/cliente/trabajos'} className='btnTrabajos'>
+                        {window.innerWidth < 992 ? <i className="fas fa-list"></i> : 'Ver trabajos'}
+                    </Link>
                 </BtnTrabajos>
             </TD>
         </Fragment>

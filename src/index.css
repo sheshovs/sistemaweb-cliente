@@ -76,3 +76,20 @@ code {
   background-color: rgb(230, 78, 78);
   color: var(--blanco);
 }
+
+.azul {
+  color:darkcyan;
+  text-decoration: none;
+}
+
+.azul:hover{
+  text-decoration: underline;
+}
+
+.open{
+  height: 170px !important;
+}
+
+.menu-open{
+  display:flex !important;
+}

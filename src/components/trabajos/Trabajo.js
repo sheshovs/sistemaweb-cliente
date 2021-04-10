@@ -67,6 +67,10 @@ const DivInfo = styled.p`
     :nth-child(3){
         width:20%;
     }
+
+    @media (max-width:675px){
+        padding:10px;
+    }
 `;
 
 const DivAcciones = styled.div`
