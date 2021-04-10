@@ -9,12 +9,13 @@ import trabajoContext from '../context/trabajos/trabajoContext'
 
 import { Link, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
+import Confirmacion from '../layout/Confirmacion';
 
 
 const Trabajos = () => {
 
     const clientesContext = useContext(clienteContext);
-    const { popup, clienteActual, handleNuevoCliente, eliminarCliente } = clientesContext;
+    const { confirmacion, popup, clienteActual, handleNuevoCliente, handleConfirmacion } = clientesContext;
 
     const trabajosContext = useContext(trabajoContext);
     const { trabajoscliente } = trabajosContext;
@@ -51,7 +52,7 @@ const Trabajos = () => {
 
     const [cliente] = clienteActual;
 
-    const { _id, nombre, patente, tel, marca, modelo } = cliente;
+    const { nombre, patente, tel, marca, modelo } = cliente;
 
 
 
@@ -59,11 +60,16 @@ const Trabajos = () => {
         handleNuevoCliente(true);
     }
 
+    const mostrarPopupConfirmacion = () => {
+        handleConfirmacion(true);
+    }
+
     console.log(size.width);
 
     return (
         <Container>
             {popup ? <EditarCliente /> : null}
+            {confirmacion ? <Confirmacion /> : null}
 
             {size.width < 992 ? <Nav /> : <Sidebar />}
             <DivTrabajos>
@@ -81,13 +87,11 @@ const Trabajos = () => {
                                 : ('Editar'))}
                         </BtnNuevoCliente>
                         <BtnEliminar
-                            onClick={() => (eliminarCliente(_id))}
+                            onClick={mostrarPopupConfirmacion}
                         >
-                            <Link to={'/clientes'} className='enlace'>
-                                {(window.innerWidth < 1300
-                                    ? <i className="fas fa-user-times"></i>
-                                    : ('Eliminar'))}
-                            </Link>
+                            {(window.innerWidth < 1300
+                                ? <i className="fas fa-user-times"></i>
+                                : ('Eliminar'))}
                         </BtnEliminar>
                     </DivBotones>
                 </DivTitulo>
@@ -254,10 +258,28 @@ const DivInfo = styled.div`
         width:100%;
         margin:20px auto;
     }
+
+    @media (max-width:500px){
+        flex-wrap:wrap;
+    }
+    @media (max-width:400px){
+        flex-direction:column;
+    }
 `;
 
 const PInfo = styled.p`
     font-size:18px;
+
+    @media (max-width:500px){
+        width:50%;
+        display:flex;
+        justify-content:space-around;
+    }
+
+    @media (max-width:400px){
+        width:100%;
+        justify-content:space-evenly;
+    }
 `;
 
 const DivNuevoTrabajo = styled.div`
@@ -267,4 +289,8 @@ const DivNuevoTrabajo = styled.div`
 const Mensaje = styled.p`
     font-size:32px;
     font-weight:bold;
+    
+    @media (max-width:400px){
+        font-size:26px;
+    }
 `;

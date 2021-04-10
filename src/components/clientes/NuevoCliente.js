@@ -112,7 +112,7 @@ const NuevoCliente = () => {
                                     type='text'
                                     name='modelo'
                                     id='modelo'
-                                    placeholder='Ingrese el modelo del cliente'
+                                    placeholder='Ingrese el modelo del vehiculo'
                                     onChange={onChange}
                                     value={modelo}
                                 />
@@ -187,6 +187,9 @@ const Titulo = styled.h1`
         margin-bottom:10px;
         text-align:center;
     }
+    @media (max-width:400px){
+        font-size:26px;
+    }
 `;
 
 const Formulario = styled.form`
@@ -206,7 +209,7 @@ const FormGroup = styled.div`
     margin-bottom:40px;
 
     @media (max-width:768px){
-        margin-bottom:10px;
+        margin-bottom:5px;
     }
 `;
 
@@ -219,12 +222,21 @@ const FormGroup2 = styled.div`
     @media (max-width:768px){
         flex-direction:column;
         align-items:center;
+
+        :nth-child(4){
+            flex-direction:row;
+        }
     }
 `;
 
 const Label = styled.label`
     font-size:20px;
     margin-bottom:10px;
+
+    @media (max-width:768px){
+        font-size:16px;
+        margin-bottom:5px;
+    }
 `;
 
 const Input = styled.input`
@@ -249,6 +261,8 @@ const Input = styled.input`
     }
     @media (max-width:768px){
         width:350px;
+        height:35px;
+        font-size:14px;
     }
     @media (max-width:485px){
         width:250px;
@@ -274,6 +288,9 @@ const BtnEnviar = styled.button`
 
     @media (max-width:768px){
         margin-top:10px;
+        height:40px;
+        font-size:16px;
+        width:45%;
     }
 `;
 
@@ -295,6 +312,9 @@ const BtnCancelar = styled.button`
     }
 
     @media (max-width:768px){
-        margin-top:20px;
+        margin-top:10px;
+        height:40px;
+        font-size:16px;
+        width:45%;
     }
 `;

@@ -7,6 +7,7 @@ import {
     OBTENER_CLIENTES,
     FILTRAR_CLIENTES,
     MOSTRAR_AGREGAR_CLIENTE,
+    MOSTRAR_CONFIRMACION,
     CLIENTE_ACTUAL,
     ACTUALIZAR_CLIENTE,
     ELIMINAR_CLIENTE,
@@ -22,6 +23,7 @@ const ClienteState = (props) => {
         clientes: [],
         filtrados: [],
         popup: false,
+        confirmacion: false,
         clienteActual: null,
         mensaje: null
     }
@@ -83,6 +85,13 @@ const ClienteState = (props) => {
             payload: patente
         })
 
+    }
+
+    const handleConfirmacion = (estado) => {
+        dispatch({
+            type: MOSTRAR_CONFIRMACION,
+            payload: estado
+        })
     }
 
     const handleNuevoCliente = (estado) => {
@@ -149,12 +158,14 @@ const ClienteState = (props) => {
             value={{
                 clientes: state.clientes,
                 filtrados: state.filtrados,
+                confirmacion: state.confirmacion,
                 popup: state.popup,
                 clienteActual: state.clienteActual,
                 mensaje: state.mensaje,
                 agregarCliente,
                 obtenerClientes,
                 filtrarClientes,
+                handleConfirmacion,
                 handleNuevoCliente,
                 obtenerClienteActual,
                 actualizarCliente,

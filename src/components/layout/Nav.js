@@ -90,7 +90,7 @@ const Titulo = styled.h1`
 const Menu = styled.div`
     width:80%;
     height:60px;
-    margin-top:10px;
+    margin-top:30px;
     flex-direction:column;
     align-items:center;
     justify-content:space-between;

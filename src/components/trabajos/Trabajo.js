@@ -45,6 +45,7 @@ export default Trabajo;
 
 const Container = styled.div`
     width: 100%;
+    min-height:100px;
     border: 1px solid rgba(0,0,0,.1);
     border-top:none;
     display:flex;
@@ -54,7 +55,7 @@ const Container = styled.div`
 
 const DivInfo = styled.p`
     width:40%;
-    height:100%;
+    height:100px;
     border-right: 1px solid rgba(0,0,0,.1);
     display:flex;
     justify-content:center;
@@ -75,11 +76,15 @@ const DivInfo = styled.p`
 
 const DivAcciones = styled.div`
     width:20%;
-    height:100%;
+    height:100px;
     padding:10px;
     display:flex;
     justify-content:space-around;
     align-items:center;
+
+    @media (max-width:400px){
+        flex-direction:column;
+    }
 `;
 const DivEditar = styled.div`
     display:flex;

@@ -3,6 +3,7 @@ import {
     OBTENER_CLIENTES,
     FILTRAR_CLIENTES,
     MOSTRAR_AGREGAR_CLIENTE,
+    MOSTRAR_CONFIRMACION,
     CLIENTE_ACTUAL,
     ACTUALIZAR_CLIENTE,
     ELIMINAR_CLIENTE,
@@ -34,6 +35,11 @@ export default (state, action) => {
                 ...state,
                 popup: action.payload
             }
+        case MOSTRAR_CONFIRMACION:
+            return {
+                ...state,
+                confirmacion: action.payload
+            }
         case CLIENTE_ACTUAL:
             return {
                 ...state,
@@ -48,7 +54,8 @@ export default (state, action) => {
         case ELIMINAR_CLIENTE:
             return {
                 ...state,
-                filtrados: state.clientes.filter(cliente => (cliente._id !== action.payload))
+                filtrados: state.clientes.filter(cliente => (cliente._id !== action.payload)),
+                confirmacion: false
             }
         case CLIENTE_ERROR:
             return {

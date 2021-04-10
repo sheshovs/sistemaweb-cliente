@@ -119,4 +119,8 @@ const TRbody = styled.tr`
 const Mensaje = styled.p`
     font-size:32px;
     font-weight:bold;
+
+    @media (max-width:400px){
+        font-size:26px;
+    }
 `;

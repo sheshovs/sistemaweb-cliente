@@ -14,7 +14,7 @@ const ListadoTrabajos = () => {
                 <DivInfo><strong>Descripción</strong></DivInfo>
                 <DivInfo><strong>Km</strong></DivInfo>
                 <DivInfo><strong>Fecha</strong></DivInfo>
-                <DivAcciones><strong>Acciones</strong></DivAcciones>
+                <DivAcciones></DivAcciones>
             </DivHead>
             {trabajoscliente.map(trabajo => (
 
@@ -67,8 +67,4 @@ const DivInfo = styled.p`
 const DivAcciones = styled.div`
     width:20%;
     height:100%;
-    padding:10px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
 `;

@@ -16,7 +16,7 @@ const Clientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { popup, filtrarClientes, handleNuevoCliente } = clientesContext;
+    const { popup, filtrarClientes, handleNuevoCliente, obtenerClientes } = clientesContext;
 
     const [filtro, guardarFiltro] = useState({
         patente: ''
@@ -54,6 +54,7 @@ const Clientes = () => {
 
     useEffect(() => {
         usuarioAutenticado();
+        obtenerClientes();
         // eslint-disable-next-line
     }, []);
 
