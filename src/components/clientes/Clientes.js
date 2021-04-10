@@ -90,9 +90,6 @@ const Clientes = () => {
                             onChange={onChange}
                             value={patente}
                         />
-                        <Buscar
-                            type='button'
-                        >Enviar</Buscar>
                     </Busqueda>
                     <BtnNuevoCliente
                         onClick={mostrarPopup}
@@ -179,7 +176,7 @@ const Input = styled.input`
     height:50px;
     border:none;
     border:1px solid rgba(0,0,0,.3);
-    border-radius:5px 0 0 5px;
+    border-radius:5px;
     padding-left:10px;
     font-size:16px;
     
@@ -205,21 +202,7 @@ const Input = styled.input`
     }
 
     @media (max-width:575px){
-        width: calc(100% - 80px);
-    }
-`;
-
-const Buscar = styled.button`
-    width:80px;
-    height:50px;
-    border:none;
-    border: 1px solid rgba(0,0,0,.3);
-    border-left:none;
-    border-radius:0 5px 5px 0;
-    cursor:pointer;
-
-    :focus{
-        outline:none;
+        width:100%;
     }
 `;
 
