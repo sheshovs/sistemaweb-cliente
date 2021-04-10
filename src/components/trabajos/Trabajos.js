@@ -169,6 +169,7 @@ const Titulo = styled.h1`
         font-size:28px;
     }
     @media (max-width:500px){
+        width:100%;
         text-align:center;
     }
 `;
@@ -258,11 +259,7 @@ const DivInfo = styled.div`
         width:100%;
         margin:20px auto;
     }
-
     @media (max-width:500px){
-        flex-wrap:wrap;
-    }
-    @media (max-width:400px){
         flex-direction:column;
     }
 `;

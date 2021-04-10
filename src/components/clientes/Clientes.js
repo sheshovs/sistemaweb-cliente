@@ -132,7 +132,7 @@ const DivClientes = styled.div`
         padding:20px 50px;
     }
 
-    @media (max-width:435px){
+    @media (max-width:500px){
         padding:20px;
     }
 `;
