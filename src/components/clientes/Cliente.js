@@ -19,7 +19,7 @@ const Cliente = ({ cliente }) => {
         <Fragment>
             <TD>{nombre}</TD>
             <TD>{patente}</TD>
-            <TD>{tel}</TD>
+            <TD><a className='llamada' href={'tel:' + tel}>{tel}</a></TD>
             <TD>
                 <BtnTrabajos
                     onClick={() => {

@@ -17,7 +17,7 @@ const Sidebar = () => {
 
     return (
         <Container>
-            <Titulo>Hola {usuario ? usuario.nombre : null}!</Titulo>
+            <Titulo>Hola {usuario ? usuario.nombre : null}</Titulo>
 
             <Separar>
                 <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>

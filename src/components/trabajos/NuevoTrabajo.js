@@ -79,14 +79,13 @@ const NuevoTrabajo = () => {
         <FormTrabajos
             onSubmit={handleSubmit}
         >
-            <Input
-                type='text'
+            <TextArea
                 placeholder='Ingrese trabajo'
                 name='descripcion'
                 id='descripcion'
                 onChange={onChange}
                 value={descripcion}
-            />
+            ></TextArea>
             <Input
                 type='text'
                 placeholder='Kilometraje'
@@ -138,8 +137,30 @@ const FormTrabajos = styled.form`
     }
 `;
 
-const Input = styled.input`
+const TextArea = styled.textarea`
     width:45%;
+    height:50px;
+    border:none;
+    border:1px solid rgba(0,0,0,.3);
+    border-radius:5px;
+    padding:10px;
+    font-size:16px;
+    margin-right:20px;
+    resize:none;
+
+    @media (max-width:1080px){
+        width:55%;
+    }
+    @media (max-width:675px){
+        width:100%;
+        margin-right:0;
+        margin-bottom:10px;
+    }
+`;
+
+
+const Input = styled.input`
+    width:20%;
     height:50px;
     border:none;
     border:1px solid rgba(0,0,0,.3);
@@ -151,39 +172,20 @@ const Input = styled.input`
     :focus{
         outline:none;
     }
-
     :nth-child(2){
-        width:20%;
-    }
-    :nth-child(3){
         width:200px;
-    }
-
-    @media (max-width:1080px){
-        width:55%;
     }
 
     @media (max-width:675px){
         margin-right:0;
         margin-bottom:10px;
-        width:90%;
-
-        :nth-child(2){
-            width:40%;
-        }
-        :nth-child(3){
-            width:40%;
-        }
+        width:40%;
+        
     }
 
     @media (max-width:500px){
-        width:100%;
-        :nth-child(2){
-            width:48%;
-        }
-        :nth-child(3){
-            width:48%;
-        }
+        width:48%;
+        
     }
 `;
 

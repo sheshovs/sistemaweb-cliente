@@ -28,7 +28,7 @@ const Nav = () => {
             <Head>
                 <Icon className="fas fa-bars" onClick={handleMenu}></Icon>
                 <DivTitulo>
-                    <Titulo>Hola {usuario ? usuario.nombre : null}!</Titulo>
+                    <Titulo>Hola {usuario ? usuario.nombre : null}</Titulo>
                 </DivTitulo>
 
             </Head>
