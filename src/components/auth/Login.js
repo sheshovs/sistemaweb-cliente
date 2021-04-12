@@ -238,6 +238,7 @@ const BtnEnviar = styled.button`
     background-color:cadetblue;
     color:white;
     transition: all .2s ease;
+    outline:none;
 
     :hover{
         background-color:rgb(122, 201, 204);
