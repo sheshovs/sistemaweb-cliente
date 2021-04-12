@@ -117,15 +117,21 @@ const Trabajos = () => {
 
                 {trabajoscliente.length === 0
                     ? <Mensaje>No hay trabajos, comienza agregando uno!</Mensaje>
-                    : <DivTabla><ListadoTrabajos /></DivTabla>
+                    :
+                    <>
+                        <DivTabla>
+                            <ListadoTrabajos />
+                        </DivTabla>
+                        <ReactHTMLTableToExcel
+                            className="download-table-xls-button"
+                            table="tabla-trabajos"
+                            filename="Trabajos"
+                            sheet="Trabajos"
+                            buttonText="Descargar Trabajos" />
+                    </>
                 }
 
-                <ReactHTMLTableToExcel
-                    className="download-table-xls-button"
-                    table="tabla-trabajos"
-                    filename="Trabajos"
-                    sheet="Trabajos"
-                    buttonText="Descargar Trabajos" />
+
             </DivTrabajos>
         </Container>
 
