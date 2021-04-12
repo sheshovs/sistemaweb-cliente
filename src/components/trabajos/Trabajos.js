@@ -6,11 +6,11 @@ import NuevoTrabajo from './NuevoTrabajo'
 import ListadoTrabajos from './ListadoTrabajos'
 import clienteContext from '../context/clientes/clienteContext'
 import trabajoContext from '../context/trabajos/trabajoContext'
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { Link, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import Confirmacion from '../layout/Confirmacion';
 import ConfirmacionTrabajos from '../layout/ConfirmacionTrabajo'
+import { jsPDF } from "jspdf";
 
 
 const Trabajos = () => {
@@ -61,6 +61,20 @@ const Trabajos = () => {
 
     const mostrarPopupConfirmacion = () => {
         handleConfirmacion(true);
+    }
+
+
+    function downloadPDFWithjsPDF() {
+        var doc = new jsPDF('p', 'pt', 'a4');
+
+        doc.html(document.querySelector('#tabla-trabajos'), {
+            callback: function (doc) {
+                doc.save('Trabajos.pdf');
+            },
+            margin: [20, 20, 20, 20],
+            x: 10,
+            y: 32,
+        });
     }
 
     return (
@@ -122,12 +136,12 @@ const Trabajos = () => {
                         <DivTabla>
                             <ListadoTrabajos />
                         </DivTabla>
-                        <ReactHTMLTableToExcel
+
+                        <button
+                            type='button'
                             className="download-table-xls-button"
-                            table="tabla-trabajos"
-                            filename="Trabajos"
-                            sheet="Trabajos"
-                            buttonText="Descargar Trabajos" />
+                            onClick={downloadPDFWithjsPDF}
+                        ><i className="fas fa-file-download"></i> Descargar PDF</button>
                     </>
                 }
 
@@ -303,5 +317,9 @@ const Mensaje = styled.p`
 
 const DivTabla = styled.div`
     overflow: auto;
-    width: 100%;
+    width: 730px;
+
+    @media (max-width:760px){
+        width:100%;
+    }
 `;

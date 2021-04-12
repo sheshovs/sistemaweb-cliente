@@ -41,7 +41,7 @@ const Container = styled.table`
     border-collapse:collapse;
 
     @media (max-width:675px){
-        width:800px;
+        width:730px;
     }
 `;
 const DivHead = styled.tr`
