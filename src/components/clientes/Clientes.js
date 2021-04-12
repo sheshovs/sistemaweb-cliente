@@ -16,7 +16,7 @@ const Clientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { popup, filtrarClientes, handleNuevoCliente, obtenerClientes } = clientesContext;
+    const { clientes, popup, filtrarClientes, handleNuevoCliente, obtenerClientes } = clientesContext;
 
     const [filtro, guardarFiltro] = useState({
         patente: ''
@@ -81,12 +81,12 @@ const Clientes = () => {
             {popup ? <NuevoCliente /> : null}
             {window.innerWidth < 850 ? <Nav /> : <Sidebar />}
             <DivClientes>
-                <Titulo>Clientes</Titulo>
+                <Titulo>Clientes: {clientes.length < 10 ? '0' + clientes.length : clientes.length}</Titulo>
                 <DivBarraBtn>
                     <Busqueda>
                         <Input
                             type='text'
-                            placeholder='Buscar patente'
+                            placeholder='Buscar por Nombre o Patente'
                             name='patente'
                             onChange={onChange}
                             value={patente}
@@ -187,19 +187,11 @@ const Input = styled.input`
     }
 
     @media (max-width:1300px){
-        width:300px;
-    }
-
-    @media (max-width:992px){
-        width:250px;
-    }
-
-    @media (max-width:850px){
         width:350px;
     }
 
     @media (max-width:675px){
-        width:250px;
+        width:300px;
     }
 
     @media (max-width:575px){

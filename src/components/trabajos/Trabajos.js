@@ -10,6 +10,7 @@ import trabajoContext from '../context/trabajos/trabajoContext'
 import { Link, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import Confirmacion from '../layout/Confirmacion';
+import ConfirmacionTrabajos from '../layout/ConfirmacionTrabajo'
 
 
 const Trabajos = () => {
@@ -18,7 +19,7 @@ const Trabajos = () => {
     const { confirmacion, popup, clienteActual, handleNuevoCliente, handleConfirmacion } = clientesContext;
 
     const trabajosContext = useContext(trabajoContext);
-    const { trabajoscliente } = trabajosContext;
+    const { trabajoscliente, confirmacionT } = trabajosContext;
 
     const size = useWindowSize();
 
@@ -52,9 +53,7 @@ const Trabajos = () => {
 
     const [cliente] = clienteActual;
 
-    const { nombre, patente, tel, marca, modelo } = cliente;
-
-
+    const { nombre, patente, tel, marca, modelo, anio } = cliente;
 
     const mostrarPopup = () => {
         handleNuevoCliente(true);
@@ -64,12 +63,11 @@ const Trabajos = () => {
         handleConfirmacion(true);
     }
 
-    console.log(size.width);
-
     return (
         <Container>
             {popup ? <EditarCliente /> : null}
             {confirmacion ? <Confirmacion /> : null}
+            {confirmacionT ? <ConfirmacionTrabajos /> : null}
 
             {size.width < 992 ? <Nav /> : <Sidebar />}
             <DivTrabajos>
@@ -97,16 +95,19 @@ const Trabajos = () => {
                 </DivTitulo>
                 <DivInfo>
                     <PInfo>
-                        <strong>Teléfono:</strong> {tel}
+                        <strong>Teléfono:</strong> {window.innerWidth > 500 ? <br /> : null}  {tel}
                     </PInfo>
                     <PInfo>
-                        <strong>Patente:</strong> {patente}
+                        <strong>Patente:</strong> {window.innerWidth > 500 ? <br /> : null} {patente.toUpperCase()}
                     </PInfo>
                     <PInfo>
-                        <strong>Marca:</strong> {marca}
+                        <strong>Marca:</strong> {window.innerWidth > 500 ? <br /> : null} {marca}
                     </PInfo>
                     <PInfo>
-                        <strong>Modelo:</strong> {modelo}
+                        <strong>Modelo:</strong> {window.innerWidth > 500 ? <br /> : null} {modelo}
+                    </PInfo>
+                    <PInfo>
+                        <strong>Año:</strong> {window.innerWidth > 500 ? <br /> : null} {anio}
                     </PInfo>
                 </DivInfo>
 
@@ -245,15 +246,11 @@ const BtnVolver = styled.div`
 `;
 
 const DivInfo = styled.div`
-    width:60%;
+    width:70%;
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:30px;
-
-    @media (max-width:1080px){
-        width:70%;
-    }
 
     @media (max-width:675px){
         width:100%;
@@ -268,14 +265,13 @@ const PInfo = styled.p`
     font-size:18px;
 
     @media (max-width:500px){
-        width:50%;
+        width:60%;
         display:flex;
-        justify-content:space-around;
+        justify-content:space-between;
     }
 
     @media (max-width:400px){
-        width:100%;
-        justify-content:space-evenly;
+        width:80%;
     }
 `;
 

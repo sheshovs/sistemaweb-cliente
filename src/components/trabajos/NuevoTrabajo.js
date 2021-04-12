@@ -12,7 +12,7 @@ const NuevoTrabajo = () => {
     const [clienteA] = clienteActual;
 
     const trabajosContext = useContext(trabajoContext);
-    const { trabajoActual, agregarTrabajo, editarTrabajo, obtenerTrabajos } = trabajosContext;
+    const { estado, trabajoActual, agregarTrabajo, editarTrabajo, obtenerTrabajos } = trabajosContext;
 
 
     const [trabajo, guardarTrabajo] = useState({
@@ -27,7 +27,7 @@ const NuevoTrabajo = () => {
 
     useEffect(() => {
 
-        if (trabajoActual) {
+        if (trabajoActual && estado) {
             const [trabajoA] = trabajoActual;
 
             guardarTrabajo({
@@ -38,7 +38,7 @@ const NuevoTrabajo = () => {
                 cliente: trabajoA.cliente
             });
         }
-
+        // eslint-disable-next-line
     }, [trabajoActual]);
 
 
@@ -143,10 +143,11 @@ const TextArea = styled.textarea`
     border:none;
     border:1px solid rgba(0,0,0,.3);
     border-radius:5px;
-    padding:10px;
+    padding:15px 10px;
     font-size:16px;
     margin-right:20px;
     resize:none;
+    font-family:'Arial';
 
     @media (max-width:1080px){
         width:55%;
@@ -180,11 +181,16 @@ const Input = styled.input`
         margin-right:0;
         margin-bottom:10px;
         width:40%;
-        
+        :nth-child(2){
+            width:40%;
+        }
     }
 
     @media (max-width:500px){
         width:48%;
+        :nth-child(2){
+            width:48%;
+        }
         
     }
 `;

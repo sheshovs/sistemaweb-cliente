@@ -1,19 +1,26 @@
 import React, { Fragment, useContext } from 'react';
 import styled from 'styled-components'
 import clienteContext from '../context/clientes/clienteContext'
-import { Link } from 'react-router-dom'
+import trabajoContext from '../context/trabajos/trabajoContext'
 
-const Confirmacion = () => {
+const ConfirmacionTrabajo = () => {
 
     const clientesContext = useContext(clienteContext);
-    const { clienteActual, handleConfirmacion, eliminarCliente } = clientesContext;
+    const { clienteActual } = clientesContext;
+
+    const trabajosContext = useContext(trabajoContext);
+    const { trabajoActual, handleConfirmacionT, eliminarTrabajo, obtenerTrabajos } = trabajosContext;
 
     const [cliente] = clienteActual;
-
-    const { _id } = cliente;
+    const [trabajo] = trabajoActual;
 
     const cerrarPopup = () => {
-        handleConfirmacion(false);
+        handleConfirmacionT(false);
+    }
+
+    const deleteTrabajo = () => {
+        eliminarTrabajo(trabajo._id, cliente._id);
+        obtenerTrabajos(cliente._id);
     }
 
     return (
@@ -21,14 +28,12 @@ const Confirmacion = () => {
             <Fondo onClick={cerrarPopup}></Fondo>
             <Container>
                 <DivClientes>
-                    <Titulo>¿Está seguro que desea eliminar este cliente?</Titulo>
+                    <Titulo>¿Está seguro que desea eliminar este trabajo?</Titulo>
                     <FormGroup2>
                         <BtnEliminar
-                            onClick={() => eliminarCliente(_id)}
+                            onClick={deleteTrabajo}
                         >
-                            <Link to={'/clientes'} className='btnTrabajos' >
-                                Eliminar
-                            </Link>
+                            Eliminar
                         </BtnEliminar>
                         <BtnCancelar
                             type='button'
@@ -44,7 +49,7 @@ const Confirmacion = () => {
     );
 };
 
-export default Confirmacion;
+export default ConfirmacionTrabajo;
 
 const Fondo = styled.div`
     position:absolute;

@@ -15,9 +15,10 @@ const NuevoCliente = () => {
         tel: '',
         marca: '',
         modelo: '',
+        anio: ''
     });
 
-    const { nombre, patente, tel, marca, modelo } = cliente;
+    const { nombre, patente, tel, marca, modelo, anio } = cliente;
 
     const onChange = (e) => {
         guardarCliente({
@@ -30,7 +31,7 @@ const NuevoCliente = () => {
 
         //validar campos vacios
         if (nombre.trim() === '' || patente.trim() === '' || tel.trim() === '' ||
-            marca.trim() === '' || modelo.trim() === '') {
+            marca.trim() === '' || modelo.trim() === '' || anio.trim() === '') {
             return;
         }
 
@@ -43,6 +44,7 @@ const NuevoCliente = () => {
             tel: '',
             marca: '',
             modelo: '',
+            anio: ''
         });
     }
 
@@ -59,27 +61,16 @@ const NuevoCliente = () => {
                     <Formulario
                         onSubmit={onSubmitForm}
                     >
-                        <FormGroup>
-                            <Label htmlFor="nombre">Nombre:</Label>
-                            <Input
-                                type='text'
-                                name='nombre'
-                                id='nombre'
-                                placeholder='Ingrese nombre del cliente'
-                                onChange={onChange}
-                                value={nombre}
-                            />
-                        </FormGroup>
                         <FormGroup2>
                             <FormGroup>
-                                <Label htmlFor="patente">Patente:</Label>
+                                <Label htmlFor="nombre">Nombre:</Label>
                                 <Input
                                     type='text'
-                                    name='patente'
-                                    id='patente'
-                                    placeholder='Ingrese patente del vehiculo'
+                                    name='nombre'
+                                    id='nombre'
+                                    placeholder='Ingrese nombre del cliente'
                                     onChange={onChange}
-                                    value={patente}
+                                    value={nombre}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -118,6 +109,31 @@ const NuevoCliente = () => {
                                 />
                             </FormGroup>
                         </FormGroup2>
+                        <FormGroup2>
+                            <FormGroup>
+                                <Label htmlFor="patente">Patente:</Label>
+                                <Input
+                                    type='text'
+                                    name='patente'
+                                    id='patente'
+                                    placeholder='Ingrese patente del vehiculo'
+                                    onChange={onChange}
+                                    value={patente}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="anio">Año:</Label>
+                                <Input
+                                    type='text'
+                                    name='anio'
+                                    id='anio'
+                                    placeholder='Ingrese el año del vehiculo'
+                                    onChange={onChange}
+                                    value={anio}
+                                />
+                            </FormGroup>
+                        </FormGroup2>
+
                         <FormGroup2>
                             <BtnEnviar
                                 type='submit'
@@ -158,6 +174,7 @@ const Container = styled.div`
     left:50%;
     transform:translate(-50%,-50%);
     z-index:3;
+    overflow:hidden;
 
     @media (max-width:768px){
         transform:translate(-50%,-50%);
@@ -247,7 +264,7 @@ const Input = styled.input`
     border-radius:5px;
     padding-left:10px;
     font-size:16px;
-    
+
     :focus{
         outline:none;
         border:1px solid rgba(0,0,0,1);

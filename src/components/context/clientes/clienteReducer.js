@@ -28,7 +28,7 @@ export default (state, action) => {
         case FILTRAR_CLIENTES:
             return {
                 ...state,
-                filtrados: state.clientes.filter(cliente => cliente.patente.toLowerCase().includes(action.payload.toLowerCase()))
+                filtrados: state.clientes.filter(cliente => cliente.patente.toLowerCase().includes(action.payload.toLowerCase()) || cliente.nombre.toLowerCase().includes(action.payload.toLowerCase()))
             }
         case MOSTRAR_AGREGAR_CLIENTE:
             return {
@@ -55,6 +55,7 @@ export default (state, action) => {
             return {
                 ...state,
                 filtrados: state.clientes.filter(cliente => (cliente._id !== action.payload)),
+                clientes: state.clientes.filter(cliente => (cliente._id !== action.payload)),
                 confirmacion: false
             }
         case CLIENTE_ERROR:

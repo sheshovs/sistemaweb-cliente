@@ -7,7 +7,9 @@ import {
     AGREGAR_TRABAJO,
     ELIMINAR_TRABAJO,
     TRABAJO_ACTUAL,
-    EDITAR_TRABAJO
+    EDITAR_TRABAJO,
+    MOSTRAR_CONFIRMACION_T,
+    ESTADO_EDITAR
 } from '../../types/index'
 
 import clienteAxios from '../../../config/axios';
@@ -16,7 +18,9 @@ const TrabajoState = (props) => {
 
     const initialState = {
         trabajoscliente: [],
-        trabajoActual: null
+        trabajoActual: null,
+        confirmacionT: false,
+        estado: false
     }
 
     // Dispatch para ejecutar las acciones
@@ -70,6 +74,13 @@ const TrabajoState = (props) => {
         })
     }
 
+    const estadoEditar = estado => {
+        dispatch({
+            type: ESTADO_EDITAR,
+            payload: estado
+        })
+    }
+
     const editarTrabajo = async trabajo => {
         try {
             const resultado = await clienteAxios.put(`/api/trabajos/${trabajo._id}`, trabajo);
@@ -84,16 +95,27 @@ const TrabajoState = (props) => {
         }
     }
 
+    const handleConfirmacionT = (estado) => {
+        dispatch({
+            type: MOSTRAR_CONFIRMACION_T,
+            payload: estado
+        })
+    }
+
     return (
         <trabajoContext.Provider
             value={{
+                confirmacionT: state.confirmacionT,
                 trabajoscliente: state.trabajoscliente,
                 trabajoActual: state.trabajoActual,
+                estado: state.estado,
                 obtenerTrabajos,
                 agregarTrabajo,
                 eliminarTrabajo,
                 obtenerTrabajoActual,
-                editarTrabajo
+                editarTrabajo,
+                handleConfirmacionT,
+                estadoEditar
             }}
         >
             {props.children}

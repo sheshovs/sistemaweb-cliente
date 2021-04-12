@@ -27,7 +27,7 @@ const EditarCliente = () => {
 
     if (clienteActual === null) return null;
 
-    const { nombre, patente, tel, marca, modelo } = cliente;
+    const { nombre, patente, tel, marca, modelo, anio } = cliente;
 
     const onChange = (e) => {
         guardarCliente({
@@ -66,27 +66,16 @@ const EditarCliente = () => {
                     <Formulario
                         onSubmit={onSubmitForm}
                     >
-                        <FormGroup>
-                            <Label htmlFor="nombre">Nombre:</Label>
-                            <Input
-                                type='text'
-                                name='nombre'
-                                id='nombre'
-                                placeholder='Ingrese nombre del cliente'
-                                onChange={onChange}
-                                value={nombre}
-                            />
-                        </FormGroup>
                         <FormGroup2>
                             <FormGroup>
-                                <Label htmlFor="patente">Patente:</Label>
+                                <Label htmlFor="nombre">Nombre:</Label>
                                 <Input
                                     type='text'
-                                    name='patente'
-                                    id='patente'
-                                    placeholder='Ingrese patente del vehiculo'
+                                    name='nombre'
+                                    id='nombre'
+                                    placeholder='Ingrese nombre del cliente'
                                     onChange={onChange}
-                                    value={patente}
+                                    value={nombre}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -122,6 +111,30 @@ const EditarCliente = () => {
                                     placeholder='Ingrese el modelo del vehiculo'
                                     onChange={onChange}
                                     value={modelo}
+                                />
+                            </FormGroup>
+                        </FormGroup2>
+                        <FormGroup2>
+                            <FormGroup>
+                                <Label htmlFor="patente">Patente:</Label>
+                                <Input
+                                    type='text'
+                                    name='patente'
+                                    id='patente'
+                                    placeholder='Ingrese patente del vehiculo'
+                                    onChange={onChange}
+                                    value={patente}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="anio">Año:</Label>
+                                <Input
+                                    type='text'
+                                    name='anio'
+                                    id='anio'
+                                    placeholder='Ingrese el año del vehiculo'
+                                    onChange={onChange}
+                                    value={anio}
                                 />
                             </FormGroup>
                         </FormGroup2>

@@ -18,7 +18,7 @@ const Cliente = ({ cliente }) => {
     return (
         <Fragment>
             <TD>{nombre}</TD>
-            <TD>{patente}</TD>
+            <TD>{patente.toUpperCase()}</TD>
             <TD><a className='llamada' href={'tel:' + tel}>{tel}</a></TD>
             <TD>
                 <BtnTrabajos

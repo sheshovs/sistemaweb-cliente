@@ -1,30 +1,27 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components'
 import trabajoContext from '../context/trabajos/trabajoContext'
-import clienteContext from '../context/clientes/clienteContext'
 
 const Trabajo = ({ trabajo }) => {
 
     const trabajosContext = useContext(trabajoContext);
-    const { eliminarTrabajo, obtenerTrabajoActual, obtenerTrabajos } = trabajosContext;
-
-    const clientesContext = useContext(clienteContext);
-    const { clienteActual } = clientesContext;
-
-    const [cliente] = clienteActual;
+    const { obtenerTrabajoActual, handleConfirmacionT, estadoEditar } = trabajosContext;
 
     const { descripcion, kilometraje, fecha } = trabajo;
 
     const selectTrabajo = () => {
         obtenerTrabajoActual(trabajo._id);
+        estadoEditar(true);
     }
 
-    const deleteTrabajo = () => {
-        eliminarTrabajo(trabajo._id, cliente._id);
-        obtenerTrabajos(cliente._id);
+    const mostrarPopupConfirmacion = () => {
+        handleConfirmacionT(true);
+        obtenerTrabajoActual(trabajo._id);
+        estadoEditar(false);
     }
 
     return (
+
         <Container>
             <DivInfo>{descripcion}</DivInfo>
             <DivInfo>{kilometraje}</DivInfo>
@@ -34,10 +31,11 @@ const Trabajo = ({ trabajo }) => {
                     onClick={selectTrabajo}
                 ><i className="fas fa-edit"></i></DivEditar>
                 <DivEliminar
-                    onClick={deleteTrabajo}
+                    onClick={mostrarPopupConfirmacion}
                 ><i className="fas fa-trash-alt"></i></DivEliminar>
             </DivAcciones>
         </Container>
+
     );
 };
 
@@ -55,17 +53,20 @@ const Container = styled.div`
 
 const DivInfo = styled.p`
     width:40%;
-    height:100px;
+    height:100%;
     border-right: 1px solid rgba(0,0,0,.1);
     display:flex;
-    justify-content:center;
+    justify-content:flex-start;
     align-items:center;
     padding:20px;
+    white-space:pre-wrap;
 
     :nth-child(2){
+        justify-content:center;
         width:20%;
     }
     :nth-child(3){
+        justify-content:center;
         width:20%;
     }
 
@@ -76,7 +77,7 @@ const DivInfo = styled.p`
 
 const DivAcciones = styled.div`
     width:20%;
-    height:100px;
+    height:100%;
     padding:10px;
     display:flex;
     justify-content:space-around;
