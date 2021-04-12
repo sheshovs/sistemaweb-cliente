@@ -7,7 +7,7 @@ const Trabajo = ({ trabajo }) => {
     const trabajosContext = useContext(trabajoContext);
     const { obtenerTrabajoActual, handleConfirmacionT, estadoEditar } = trabajosContext;
 
-    const { descripcion, kilometraje, fecha } = trabajo;
+    const { descripcion, kilometraje, fecha, costo } = trabajo;
 
     const selectTrabajo = () => {
         obtenerTrabajoActual(trabajo._id);
@@ -26,6 +26,7 @@ const Trabajo = ({ trabajo }) => {
             <DivInfo>{descripcion}</DivInfo>
             <DivInfo>{kilometraje}</DivInfo>
             <DivInfo>{fecha.substr(8, 2) + '-' + fecha.substr(5, 2) + '-' + fecha.substr(0, 4)}</DivInfo>
+            <DivInfo>${costo}</DivInfo>
             <DivAcciones>
                 <DivEditar
                     onClick={selectTrabajo}
@@ -41,20 +42,23 @@ const Trabajo = ({ trabajo }) => {
 
 export default Trabajo;
 
-const Container = styled.div`
+const Container = styled.tr`
     width: 100%;
     min-height:100px;
     border: 1px solid rgba(0,0,0,.1);
     border-top:none;
     display:flex;
-    justify-content:flex-start;
+    justify-content:center;
     align-items:center;
+
+    :nth-child(2n){
+        background-color:#f7f7f7;
+    }
 `;
 
-const DivInfo = styled.p`
+const DivInfo = styled.td`
     width:40%;
     height:100%;
-    border-right: 1px solid rgba(0,0,0,.1);
     display:flex;
     justify-content:flex-start;
     align-items:center;
@@ -63,11 +67,15 @@ const DivInfo = styled.p`
 
     :nth-child(2){
         justify-content:center;
-        width:20%;
+        width:10%;
     }
     :nth-child(3){
         justify-content:center;
         width:20%;
+    }
+    :nth-child(4){
+        justify-content:center;
+        width:10%;
     }
 
     @media (max-width:675px){
@@ -75,17 +83,13 @@ const DivInfo = styled.p`
     }
 `;
 
-const DivAcciones = styled.div`
+const DivAcciones = styled.td`
     width:20%;
     height:100%;
     padding:10px;
     display:flex;
     justify-content:space-around;
     align-items:center;
-
-    @media (max-width:400px){
-        flex-direction:column;
-    }
 `;
 const DivEditar = styled.div`
     display:flex;

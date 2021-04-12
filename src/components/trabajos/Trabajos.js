@@ -6,7 +6,7 @@ import NuevoTrabajo from './NuevoTrabajo'
 import ListadoTrabajos from './ListadoTrabajos'
 import clienteContext from '../context/clientes/clienteContext'
 import trabajoContext from '../context/trabajos/trabajoContext'
-
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { Link, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import Confirmacion from '../layout/Confirmacion';
@@ -117,8 +117,15 @@ const Trabajos = () => {
 
                 {trabajoscliente.length === 0
                     ? <Mensaje>No hay trabajos, comienza agregando uno!</Mensaje>
-                    : <ListadoTrabajos />
+                    : <DivTabla><ListadoTrabajos /></DivTabla>
                 }
+
+                <ReactHTMLTableToExcel
+                    className="download-table-xls-button"
+                    table="tabla-trabajos"
+                    filename="Trabajos"
+                    sheet="Trabajos"
+                    buttonText="Descargar Trabajos" />
             </DivTrabajos>
         </Container>
 
@@ -286,4 +293,9 @@ const Mensaje = styled.p`
     @media (max-width:400px){
         font-size:26px;
     }
+`;
+
+const DivTabla = styled.div`
+    overflow: auto;
+    width: 100%;
 `;

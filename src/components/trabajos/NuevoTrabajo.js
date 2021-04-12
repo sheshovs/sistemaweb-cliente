@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import trabajoContext from '../context/trabajos/trabajoContext'
 import clienteContext from '../context/clientes/clienteContext'
-
 import styled from 'styled-components'
 
 const NuevoTrabajo = () => {
@@ -12,18 +11,19 @@ const NuevoTrabajo = () => {
     const [clienteA] = clienteActual;
 
     const trabajosContext = useContext(trabajoContext);
-    const { estado, trabajoActual, agregarTrabajo, editarTrabajo, obtenerTrabajos } = trabajosContext;
+    const { estado, trabajoActual, agregarTrabajo, editarTrabajo, obtenerTrabajos, estadoEditar } = trabajosContext;
 
 
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
         kilometraje: '',
         fecha: new Date().toISOString().slice(0, 10),
+        costo: '',
         cliente: clienteA._id
     });
 
 
-    const { descripcion, kilometraje, fecha } = trabajo;
+    const { descripcion, kilometraje, fecha, costo } = trabajo;
 
     useEffect(() => {
 
@@ -35,6 +35,7 @@ const NuevoTrabajo = () => {
                 descripcion: trabajoA.descripcion,
                 kilometraje: trabajoA.kilometraje,
                 fecha: trabajoA.fecha.slice(0, 10),
+                costo: trabajoA.costo,
                 cliente: trabajoA.cliente
             });
         }
@@ -52,15 +53,17 @@ const NuevoTrabajo = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if (descripcion.trim() === '' || kilometraje.trim() === '') {
+        if (descripcion.trim() === '') {
             return;
         }
 
-        if (trabajoActual === null) {
+        if (!estado) {
+            console.log(trabajo);
             agregarTrabajo(trabajo);
 
         } else {
             editarTrabajo(trabajo);
+            estadoEditar(false);
         }
 
 
@@ -68,6 +71,7 @@ const NuevoTrabajo = () => {
             descripcion: '',
             kilometraje: '',
             fecha: new Date().toISOString().slice(0, 10),
+            costo: '',
             cliente: clienteA._id
         });
         setTimeout(() => {
@@ -87,7 +91,7 @@ const NuevoTrabajo = () => {
                 value={descripcion}
             ></TextArea>
             <Input
-                type='text'
+                type='number'
                 placeholder='Kilometraje'
                 name='kilometraje'
                 id='kilometraje'
@@ -101,10 +105,18 @@ const NuevoTrabajo = () => {
                 onChange={onChange}
                 value={fecha}
             />
+            <Input
+                type='number'
+                placeholder='Costo'
+                name='costo'
+                id='costo'
+                onChange={onChange}
+                value={costo}
+            />
             <BtnAgregar
                 type='submit'
             >
-                {trabajoActual
+                {trabajoActual && estado
                     ? (window.innerWidth < 1300
                         ? <i className="fas fa-edit"></i>
                         : ('Editar trabajo'))
@@ -173,25 +185,19 @@ const Input = styled.input`
     :focus{
         outline:none;
     }
-    :nth-child(2){
-        width:200px;
-    }
 
     @media (max-width:675px){
         margin-right:0;
         margin-bottom:10px;
         width:40%;
-        :nth-child(2){
-            width:40%;
-        }
     }
 
     @media (max-width:500px){
         width:48%;
-        :nth-child(2){
-            width:48%;
-        }
         
+        :nth-child(4){
+            width:100%;
+        }
     }
 `;
 

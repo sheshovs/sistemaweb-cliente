@@ -129,7 +129,7 @@ const EditarCliente = () => {
                             <FormGroup>
                                 <Label htmlFor="anio">Año:</Label>
                                 <Input
-                                    type='text'
+                                    type='number'
                                     name='anio'
                                     id='anio'
                                     placeholder='Ingrese el año del vehiculo'
@@ -162,9 +162,9 @@ const EditarCliente = () => {
 export default EditarCliente;
 
 const Fondo = styled.div`
-    position:absolute;
+    position:fixed;
     width: 100%;
-    min-height:100vh;
+    min-height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
