@@ -34,6 +34,7 @@ const Nav = () => {
             </Head>
             <Menu id='nav'>
                 <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
+                <Link to={'/reportes'} className='enlace'><i class="fas fa-file-invoice-dollar"></i> Reportes</Link>
                 <BtnExit
                     onClick={() => cerrarSesion()}
                 ><i className="fas fa-sign-out-alt"></i> Salir</BtnExit>
@@ -50,7 +51,7 @@ const Container = styled.div`
     background-color:cadetblue;
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
     flex-direction:column;
     box-shadow: 0 2px 5px rgba(0,0,0,.3);
 
@@ -58,6 +59,7 @@ const Container = styled.div`
 `;
 
 const Head = styled.div`
+    margin-top:20px;
     width:80%;
     display:flex;
     align-items:center;

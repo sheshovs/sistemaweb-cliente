@@ -20,7 +20,10 @@ const Sidebar = () => {
             <Titulo>Hola {usuario ? usuario.nombre : null}</Titulo>
 
             <Separar>
-                <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
+                <ItemsMenu>
+                    <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
+                    <Link to={'/reportes'} className='enlace'><i class="fas fa-file-invoice-dollar"></i> Reportes</Link>
+                </ItemsMenu>
                 <BtnExit
                     onClick={() => cerrarSesion()}
                 ><i className="fas fa-sign-out-alt"></i> Salir</BtnExit>
@@ -61,6 +64,11 @@ const Separar = styled.div`
     flex-direction:column;
     align-items:flex-start;
     justify-content:space-between;
+`;
+
+const ItemsMenu = styled.div`
+    display:flex;
+    flex-direction:column;
 `;
 
 const BtnExit = styled.button`

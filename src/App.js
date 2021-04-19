@@ -11,6 +11,7 @@ import AlertaState from './components/context/alertas/alertaState';
 import AuthState from './components/context/autenticacion/authState';
 import tokenAuth from './config/tokenAuth';
 import RutaPrivada from './components/rutas/RutaPrivada';
+import Reportes from './components/reportes/Reportes';
 
 
 
@@ -32,6 +33,7 @@ function App() {
                 <Route exact path={'/nueva-cuenta'} component={NuevaCuenta} />
                 <RutaPrivada exact path={'/clientes'} component={Clientes} />
                 <RutaPrivada exact path={'/cliente/trabajos'} component={Trabajos} />
+                <RutaPrivada exact path={'/reportes'} component={Reportes} />
               </Switch>
             </Router>
           </AuthState>
