@@ -144,6 +144,7 @@ const NuevaCuenta = (props) => {
                         </GroupForm>
                         <BtnEnviar
                             type='submit'
+                            disabled
                         >Crear usuario</BtnEnviar>
 
                         <Link to={'/'} className='azul'>
@@ -289,11 +290,12 @@ const BtnEnviar = styled.button`
     font-size:16px;
     font-weight:bold;
     font-family:'Roboto', sans-serif;
-    background-color:cadetblue;
+    /* background-color:cadetblue; */
+    background-color:#cfcfcf;
     color:white;
     transition: all .2s ease;
 
     :hover{
-        background-color:rgb(122, 201, 204);
+        /* background-color:rgb(122, 201, 204); */
     }
 `;

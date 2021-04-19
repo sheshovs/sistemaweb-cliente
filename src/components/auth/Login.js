@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import alertaContext from '../context/alertas/alertaContext'
 import AuthContext from '../context/autenticacion/authContext'
+import Spinner from '../Spinner.js'
 
 const Login = props => {
 
@@ -12,6 +13,8 @@ const Login = props => {
 
     const authContext = useContext(AuthContext);
     const { mensaje, autenticado, iniciarSesion } = authContext;
+
+    const [cargando, guardarCargando] = useState(false);
 
     useEffect(() => {
         if (autenticado) {
@@ -47,8 +50,14 @@ const Login = props => {
             return;
         }
 
+        guardarCargando(true);
+
         //pasarlo al action
         iniciarSesion({ email, password });
+
+        setTimeout(() => {
+            guardarCargando(false);
+        }, 5000);
     }
 
     return (
@@ -88,6 +97,9 @@ const Login = props => {
                                 value={password}
                             />
                         </GroupForm>
+
+                        {cargando ? <Spinner /> : null}
+
                         <BtnEnviar
                             type='submit'
                         >Ingresar</BtnEnviar>
@@ -134,7 +146,6 @@ const DivDerecho = styled.div`
 
 const BoxForm = styled.div`
     width:60%;
-    min-height:450px;
     border: 1px solid rgba(0,0,0,.3);
     border-radius:15px;
     display:flex;
@@ -142,7 +153,7 @@ const BoxForm = styled.div`
     align-items:center;
     justify-content:center;
     background-color:#fff;
-    padding:10px;
+    padding:50px 30px;
 
     @media (max-width:1080px){
         width:80%;
@@ -170,15 +181,10 @@ const Titulo = styled.h1`
 
 const Formulario = styled.form`
     width:80%;
-    min-height:250px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-around;
-
-    @media (max-width:1080px){
-        height:300px;
-    }
 
 `;
 
@@ -188,6 +194,7 @@ const GroupForm = styled.div`
     display:flex;
     justify-content: space-between;
     align-items:center;
+    margin-bottom:20px;
 
     @media (max-width:1080px){
         height:70px;
@@ -239,8 +246,10 @@ const BtnEnviar = styled.button`
     color:white;
     transition: all .2s ease;
     outline:none;
+    margin-bottom:20px;
 
     :hover{
         background-color:rgb(122, 201, 204);
     }
+
 `;
