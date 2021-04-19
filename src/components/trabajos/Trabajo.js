@@ -24,9 +24,9 @@ const Trabajo = ({ trabajo }) => {
 
         <Container>
             <DivInfo>{descripcion}</DivInfo>
-            <DivInfo>{kilometraje}</DivInfo>
+            <DivInfo>{kilometraje.toLocaleString('de-DE')}</DivInfo>
             <DivInfo>{fecha.substr(8, 2) + '-' + fecha.substr(5, 2) + '-' + fecha.substr(0, 4)}</DivInfo>
-            <DivInfo>${costo}</DivInfo>
+            <DivInfo>${costo.toLocaleString('de-DE')}</DivInfo>
             <DivAcciones>
                 <DivEditar
                     onClick={selectTrabajo}

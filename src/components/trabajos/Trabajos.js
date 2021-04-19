@@ -63,18 +63,33 @@ const Trabajos = () => {
         handleConfirmacion(true);
     }
 
+    const ultimoTrabajo = trabajoscliente[0];
 
     function downloadPDFWithjsPDF() {
         var doc = new jsPDF('p', 'pt', 'a4');
 
-        doc.html(document.querySelector('#tabla-trabajos'), {
-            callback: function (doc) {
-                doc.save('Trabajos.pdf');
-            },
-            margin: [20, 20, 20, 20],
-            x: 10,
-            y: 32,
-        });
+        doc.setFontSize(24);
+        doc.text(20, 50, 'Cliente: ' + nombre);
+
+        doc.setFontSize(16);
+        doc.text(20, 90, 'Teléfono: ' + tel);
+        doc.text(20, 110, 'Patente: ' + patente.toUpperCase());
+        doc.text(20, 130, 'Marca: ' + marca);
+        doc.text(20, 150, 'Modelo: ' + modelo);
+        doc.text(20, 170, 'Año: ' + anio);
+
+        doc.text(20, 210, 'Descripción');
+        doc.text(220, 210, 'Kilometraje');
+        doc.text(330, 210, 'Fecha');
+        doc.text(480, 210, 'Costo');
+
+        doc.text(20, 240, ultimoTrabajo.descripcion);
+        doc.text(220, 240, ultimoTrabajo.kilometraje.toLocaleString('de-DE'));
+        doc.text(330, 240, ultimoTrabajo.fecha.substr(8, 2) + '-' + ultimoTrabajo.fecha.substr(5, 2) + '-' + ultimoTrabajo.fecha.substr(0, 4));
+        doc.text(480, 240, '$' + ultimoTrabajo.costo.toLocaleString('de-DE'));
+
+
+        doc.save('Trabajos.pdf');
     }
 
     return (
@@ -317,7 +332,7 @@ const Mensaje = styled.p`
 
 const DivTabla = styled.div`
     overflow: auto;
-    width: 730px;
+    width: 100%;
 
     @media (max-width:760px){
         width:100%;
