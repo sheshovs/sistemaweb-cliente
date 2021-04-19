@@ -63,7 +63,10 @@ const Trabajos = () => {
         handleConfirmacion(true);
     }
 
-    const ultimoTrabajo = trabajoscliente[0];
+    if (trabajoscliente) {
+        var ultimoTrabajo = trabajoscliente[0];
+    }
+
 
     function downloadPDFWithjsPDF() {
         var doc = new jsPDF('p', 'pt', 'a4');
