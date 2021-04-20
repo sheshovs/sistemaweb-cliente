@@ -22,7 +22,7 @@ export default (state, action) => {
         case AGREGAR_CLIENTE:
             return {
                 ...state,
-                filtrados: [...state.clientes, action.payload],
+                clientes: [...state.clientes, action.payload],
                 popup: false
             }
         case FILTRAR_CLIENTES:

@@ -32,31 +32,9 @@ const ListadoClientes = () => {
             {filtrados.length === 0
                 ? (clientes.length === 0)
                     ? (<Mensaje>No hay clientes, comienza agregando uno!</Mensaje>)
-                    : (<TablaClientes>
-                        <thead>
-                            <tr>
-                                <THead>Nombre</THead>
-                                <THead>Patente</THead>
-                                <THead>Teléfono</THead>
-                                <THead>Acción</THead>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    : (<Mensaje>Cliente no encontrado</Mensaje>)
 
-                            {
-                                (clientes.map(cliente => (
-                                    <TRbody
-                                        key={cliente._id}
-                                    >
-                                        <Cliente
-                                            cliente={cliente}
-                                        />
-                                    </TRbody>
-                                )))
-                            }
 
-                        </tbody>
-                    </TablaClientes>)
                 : <TablaClientes>
                     <thead>
                         <tr>
