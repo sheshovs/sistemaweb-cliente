@@ -83,6 +83,7 @@ const Login = props => {
                                 placeholder='correo@correo.com'
                                 onChange={onChange}
                                 value={email}
+                                autocomplete="username"
                             />
                         </GroupForm>
                         <GroupForm>
@@ -96,6 +97,7 @@ const Login = props => {
                                 placeholder='******'
                                 onChange={onChange}
                                 value={password}
+                                autocomplete="current-password"
                             />
                         </GroupForm>
 

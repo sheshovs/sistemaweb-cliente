@@ -33,11 +33,12 @@ const Nav = () => {
 
             </Head>
             <Menu id='nav'>
-                <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
-                <Link to={'/reportes'} className='enlace'><i className="fas fa-file-invoice-dollar"></i> Reportes</Link>
+                <Link to={'/clientes'} className='enlace-nav'><IconItem className="fas fa-users"></IconItem> Clientes</Link>
+                <Link to={'/reportes'} className='enlace-nav'><IconItem className="fas fa-file-invoice-dollar"></IconItem> Reportes</Link>
                 <BtnExit
                     onClick={() => cerrarSesion()}
-                ><i className="fas fa-sign-out-alt"></i> Salir</BtnExit>
+                    className='enlace-nav'
+                ><IconItem className="fas fa-sign-out-alt"></IconItem> Salir</BtnExit>
             </Menu>
         </Container>
     );
@@ -67,10 +68,8 @@ const Head = styled.div`
 `;
 
 const Icon = styled.i`
-    padding:5px 10px;
     font-size:30px;
     color:white;
-    border:1px solid white;
     border-radius:5px;
     display:flex;
     align-items:center;
@@ -94,9 +93,19 @@ const Menu = styled.div`
     height:60px;
     margin-top:30px;
     flex-direction:column;
-    align-items:center;
+    align-items:flex-start;
     justify-content:space-between;
     display:none;
+`;
+
+const IconItem = styled.i`
+    padding:0 5px;
+    margin-right:5px;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 `;
 
 const BtnExit = styled.button`

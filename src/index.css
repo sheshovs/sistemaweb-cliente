@@ -33,6 +33,15 @@ code {
   text-shadow: 0 0 10px rgba(255,255,255,.5);
 }
 
+.enlace-nav{
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
 .btnTrabajos{
   color: white;
   text-decoration: none;

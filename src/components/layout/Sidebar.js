@@ -21,12 +21,13 @@ const Sidebar = () => {
 
             <Separar>
                 <ItemsMenu>
-                    <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
-                    <Link to={'/reportes'} className='enlace'><i className="fas fa-file-invoice-dollar"></i> Reportes</Link>
+                    <Link to={'/clientes'} className='enlace-nav'><IconItem className="fas fa-users"></IconItem> Clientes</Link>
+                    <Link to={'/reportes'} className='enlace-nav'><IconItem className="fas fa-file-invoice-dollar"></IconItem> Reportes</Link>
                 </ItemsMenu>
                 <BtnExit
                     onClick={() => cerrarSesion()}
-                ><i className="fas fa-sign-out-alt"></i> Salir</BtnExit>
+                    className='enlace-nav'
+                ><IconItem className="fas fa-sign-out-alt"></IconItem> Salir</BtnExit>
             </Separar>
         </Container>
     );
@@ -69,6 +70,16 @@ const Separar = styled.div`
 const ItemsMenu = styled.div`
     display:flex;
     flex-direction:column;
+`;
+
+const IconItem = styled.i`
+    padding:0 5px;
+    margin-right:5px;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 `;
 
 const BtnExit = styled.button`
