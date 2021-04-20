@@ -15,17 +15,16 @@ const ListadoClientes = () => {
     const { alerta, mostrarAlerta } = alertaContext;
 
     useEffect(() => {
+
         // si hay un error
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria);
         }
+
+        obtenerClientes();
+
         // eslint-disable-next-line
     }, [mensaje]);
-
-    useEffect(() => {
-        obtenerClientes();
-        // eslint-disable-next-line 
-    }, [clientes]);
 
     return (
         <>
@@ -33,9 +32,31 @@ const ListadoClientes = () => {
             {filtrados.length === 0
                 ? (clientes.length === 0)
                     ? (<Mensaje>No hay clientes, comienza agregando uno!</Mensaje>)
-                    : (<Mensaje>Cliente no encontrado</Mensaje>)
+                    : (<TablaClientes>
+                        <thead>
+                            <tr>
+                                <THead>Nombre</THead>
+                                <THead>Patente</THead>
+                                <THead>Teléfono</THead>
+                                <THead>Acción</THead>
+                            </tr>
+                        </thead>
+                        <tbody>
 
+                            {
+                                (clientes.map(cliente => (
+                                    <TRbody
+                                        key={cliente._id}
+                                    >
+                                        <Cliente
+                                            cliente={cliente}
+                                        />
+                                    </TRbody>
+                                )))
+                            }
 
+                        </tbody>
+                    </TablaClientes>)
                 : <TablaClientes>
                     <thead>
                         <tr>

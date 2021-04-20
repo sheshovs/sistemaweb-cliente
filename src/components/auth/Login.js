@@ -23,7 +23,6 @@ const Login = props => {
 
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria);
-            guardarCargando(false);
         }
         // eslint-disable-next-line
     }, [mensaje, autenticado, props.history]);
