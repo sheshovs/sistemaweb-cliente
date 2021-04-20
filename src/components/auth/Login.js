@@ -58,7 +58,7 @@ const Login = props => {
 
         setTimeout(() => {
             guardarCargando(false);
-        }, 10000);
+        }, 15000);
     }
 
     return (
