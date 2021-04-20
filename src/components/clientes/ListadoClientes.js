@@ -9,7 +9,7 @@ const ListadoClientes = () => {
 
     // Extraer clientes de state inicial
     const clientesContext = useContext(clienteContext);
-    const { mensaje, filtrados, clientes, obtenerClientes } = clientesContext;
+    const { mensaje, filtrados, clientes } = clientesContext;
 
     const alertaContext = useContext(AlertaContext);
     const { alerta, mostrarAlerta } = alertaContext;
@@ -20,11 +20,9 @@ const ListadoClientes = () => {
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria);
         }
-
-        obtenerClientes();
-
         // eslint-disable-next-line
     }, [mensaje]);
+
 
     return (
         <>
@@ -32,31 +30,7 @@ const ListadoClientes = () => {
             {filtrados.length === 0
                 ? (clientes.length === 0)
                     ? (<Mensaje>No hay clientes, comienza agregando uno!</Mensaje>)
-                    : (<TablaClientes>
-                        <thead>
-                            <tr>
-                                <THead>Nombre</THead>
-                                <THead>Patente</THead>
-                                <THead>Teléfono</THead>
-                                <THead>Acción</THead>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {
-                                (clientes.map(cliente => (
-                                    <TRbody
-                                        key={cliente._id}
-                                    >
-                                        <Cliente
-                                            cliente={cliente}
-                                        />
-                                    </TRbody>
-                                )))
-                            }
-
-                        </tbody>
-                    </TablaClientes>)
+                    : (<Mensaje>Cliente no encontrado</Mensaje>)
                 : <TablaClientes>
                     <thead>
                         <tr>
