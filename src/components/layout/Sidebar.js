@@ -22,7 +22,7 @@ const Sidebar = () => {
             <Separar>
                 <ItemsMenu>
                     <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
-                    <Link to={'/reportes'} className='enlace'><i class="fas fa-file-invoice-dollar"></i> Reportes</Link>
+                    <Link to={'/reportes'} className='enlace'><i className="fas fa-file-invoice-dollar"></i> Reportes</Link>
                 </ItemsMenu>
                 <BtnExit
                     onClick={() => cerrarSesion()}

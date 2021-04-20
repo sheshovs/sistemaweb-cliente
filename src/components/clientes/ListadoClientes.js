@@ -108,11 +108,11 @@ const THead = styled.th`
 `;
 
 const TRbody = styled.tr`
-    background-color:#eee;
+    background-color:#fff;
     border-bottom:1px solid rgba(0,0,0,.3);
 
     :nth-child(2n){
-        background-color:#fff;
+        background-color:#eee;
     }
 `;
 

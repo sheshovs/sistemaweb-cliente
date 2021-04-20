@@ -50,9 +50,9 @@ const Container = styled.tr`
     display:flex;
     justify-content:center;
     align-items:center;
-
+    
     :nth-child(2n){
-        background-color:#f7f7f7;
+        background-color:#eee;
     }
 `;
 

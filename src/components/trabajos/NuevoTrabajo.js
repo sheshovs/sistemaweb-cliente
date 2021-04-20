@@ -16,10 +16,11 @@ const NuevoTrabajo = () => {
 
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
-        kilometraje: '',
+        kilometraje: 0,
         fecha: new Date().toISOString().slice(0, 10),
-        costo: '',
-        cliente: clienteA._id
+        costo: 0,
+        cliente: clienteA._id,
+        creador: clienteA.creador
     });
 
 
@@ -36,7 +37,8 @@ const NuevoTrabajo = () => {
                 kilometraje: trabajoA.kilometraje,
                 fecha: trabajoA.fecha.slice(0, 10),
                 costo: trabajoA.costo,
-                cliente: trabajoA.cliente
+                cliente: trabajoA.cliente,
+                creador: clienteA.creador
             });
         }
         // eslint-disable-next-line
@@ -58,7 +60,6 @@ const NuevoTrabajo = () => {
         }
 
         if (!estado) {
-            console.log(trabajo);
             agregarTrabajo(trabajo);
 
         } else {
@@ -69,10 +70,11 @@ const NuevoTrabajo = () => {
 
         guardarTrabajo({
             descripcion: '',
-            kilometraje: '',
+            kilometraje: 0,
             fecha: new Date().toISOString().slice(0, 10),
-            costo: '',
-            cliente: clienteA._id
+            costo: 0,
+            cliente: clienteA._id,
+            creador: clienteA.creador
         });
         setTimeout(() => {
             obtenerTrabajos(clienteA._id);

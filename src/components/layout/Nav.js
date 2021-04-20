@@ -34,7 +34,7 @@ const Nav = () => {
             </Head>
             <Menu id='nav'>
                 <Link to={'/clientes'} className='enlace'><i className="fas fa-users"></i> Clientes</Link>
-                <Link to={'/reportes'} className='enlace'><i class="fas fa-file-invoice-dollar"></i> Reportes</Link>
+                <Link to={'/reportes'} className='enlace'><i className="fas fa-file-invoice-dollar"></i> Reportes</Link>
                 <BtnExit
                     onClick={() => cerrarSesion()}
                 ><i className="fas fa-sign-out-alt"></i> Salir</BtnExit>

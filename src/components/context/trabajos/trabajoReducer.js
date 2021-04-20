@@ -5,7 +5,8 @@ import {
     TRABAJO_ACTUAL,
     EDITAR_TRABAJO,
     MOSTRAR_CONFIRMACION_T,
-    ESTADO_EDITAR
+    ESTADO_EDITAR,
+    OBTENER_TODOS_LOS_TRABAJOS
 } from '../../types/index'
 
 // eslint-disable-next-line
@@ -48,6 +49,11 @@ export default (state, action) => {
             return {
                 ...state,
                 estado: action.payload
+            }
+        case OBTENER_TODOS_LOS_TRABAJOS:
+            return {
+                ...state,
+                allTrabajos: action.payload
             }
 
         default:

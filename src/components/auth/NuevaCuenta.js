@@ -189,7 +189,6 @@ const DivDerecho = styled.div`
 
 const BoxForm = styled.div`
     width:50%;
-    min-height:550px;
     border: 1px solid rgba(0,0,0,.3);
     border-radius:15px;
     display:flex;
@@ -197,14 +196,10 @@ const BoxForm = styled.div`
     align-items:center;
     justify-content:center;
     background-color:#fff;
-    padding:10px;
+    padding:40px 20px;
 
     @media (max-width:1600px){
         width:80%;
-    }
-
-    @media (max-width:1080px){
-        height:600px;
     }
 
     @media (max-width:768px){
@@ -212,7 +207,8 @@ const BoxForm = styled.div`
     }
 
     @media (max-width:575px){
-        width:80%;
+        width:90%;
+        padding:40px 0px;
     }
 `;
 const Titulo = styled.h1`
@@ -221,19 +217,17 @@ const Titulo = styled.h1`
     font-family: 'Raleway', sans-serif;
     text-align:center;
 
+    @media (max-width:500px){
+        font-size:32px;
+    }
 `;
 
 const Formulario = styled.form`
     width:80%;
-    min-height:350px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-around;
-
-    @media (max-width:1080px){
-        height:450px;
-    }
 `;
 
 const GroupForm = styled.div`
@@ -242,6 +236,7 @@ const GroupForm = styled.div`
     display:flex;
     justify-content: space-between;
     align-items:center;
+    margin-bottom:10px;
 
     @media (max-width:1080px){
         height:70px;
@@ -257,7 +252,6 @@ const Label = styled.label`
 
     @media (max-width:1080px){
         width:100%;
-        margin-bottom:10px;
     }
 `;
 const Input = styled.input`
@@ -293,6 +287,7 @@ const BtnEnviar = styled.button`
     /* background-color:cadetblue; */
     background-color:#cfcfcf;
     color:white;
+    margin:20px 0;
     transition: all .2s ease;
 
     :hover{

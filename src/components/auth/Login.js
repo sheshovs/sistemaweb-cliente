@@ -164,7 +164,8 @@ const BoxForm = styled.div`
     }
 
     @media (max-width:575px){
-        width:80%;
+        width:90%;
+        padding:50px 0px;
     }
 `;
 const Titulo = styled.h1`

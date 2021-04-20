@@ -9,7 +9,8 @@ import {
     TRABAJO_ACTUAL,
     EDITAR_TRABAJO,
     MOSTRAR_CONFIRMACION_T,
-    ESTADO_EDITAR
+    ESTADO_EDITAR,
+    OBTENER_TODOS_LOS_TRABAJOS
 } from '../../types/index'
 
 import clienteAxios from '../../../config/axios';
@@ -20,7 +21,8 @@ const TrabajoState = (props) => {
         trabajoscliente: [],
         trabajoActual: null,
         confirmacionT: false,
-        estado: false
+        estado: false,
+        allTrabajos: []
     }
 
     // Dispatch para ejecutar las acciones
@@ -35,6 +37,21 @@ const TrabajoState = (props) => {
                 type: OBTENER_TRABAJOS,
                 payload: resultado.data.trabajos
             })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const obtenerTodosLosTrabajos = async (usuario) => {
+        try {
+            const resultado = await clienteAxios.get(`/api/trabajos/${usuario._id}`, { params: { creador: usuario._id } });
+            // console.log(resultado.data.trabajos);
+
+            dispatch({
+                type: OBTENER_TODOS_LOS_TRABAJOS,
+                payload: resultado.data.trabajos
+            });
+
         } catch (error) {
             console.log(error);
         }
@@ -109,13 +126,15 @@ const TrabajoState = (props) => {
                 trabajoscliente: state.trabajoscliente,
                 trabajoActual: state.trabajoActual,
                 estado: state.estado,
+                allTrabajos: state.allTrabajos,
                 obtenerTrabajos,
                 agregarTrabajo,
                 eliminarTrabajo,
                 obtenerTrabajoActual,
                 editarTrabajo,
                 handleConfirmacionT,
-                estadoEditar
+                estadoEditar,
+                obtenerTodosLosTrabajos
             }}
         >
             {props.children}

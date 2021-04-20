@@ -79,17 +79,15 @@ const Trabajos = () => {
         doc.text(20, 110, 'Patente: ' + patente.toUpperCase());
         doc.text(20, 130, 'Marca: ' + marca);
         doc.text(20, 150, 'Modelo: ' + modelo);
-        doc.text(20, 170, 'Año: ' + anio);
+        doc.text(20, 170, 'Año: ' + (anio == null || anio === 0 ? 'No ingresado' : anio));
 
-        doc.text(20, 210, 'Descripción');
-        doc.text(220, 210, 'Kilometraje');
-        doc.text(330, 210, 'Fecha');
-        doc.text(480, 210, 'Costo');
+        doc.text(20, 210, 'Descripción:');
+        doc.text(270, 110, 'Kilometraje');
+        doc.text(400, 110, 'Fecha');
 
-        doc.text(20, 240, ultimoTrabajo.descripcion);
-        doc.text(220, 240, ultimoTrabajo.kilometraje.toLocaleString('de-DE'));
-        doc.text(330, 240, ultimoTrabajo.fecha.substr(8, 2) + '-' + ultimoTrabajo.fecha.substr(5, 2) + '-' + ultimoTrabajo.fecha.substr(0, 4));
-        doc.text(480, 240, '$' + ultimoTrabajo.costo.toLocaleString('de-DE'));
+        doc.text(130, 210, ultimoTrabajo.descripcion);
+        doc.text(270, 130, (ultimoTrabajo.kilometraje == null || ultimoTrabajo.kilometraje === 0 ? 'No ingresado' : ultimoTrabajo.kilometraje.toLocaleString('de-DE')));
+        doc.text(400, 130, ultimoTrabajo.fecha.substr(8, 2) + '-' + ultimoTrabajo.fecha.substr(5, 2) + '-' + ultimoTrabajo.fecha.substr(0, 4));
 
 
         doc.save('Trabajos.pdf');
