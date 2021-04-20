@@ -15,16 +15,17 @@ const ListadoClientes = () => {
     const { alerta, mostrarAlerta } = alertaContext;
 
     useEffect(() => {
-
         // si hay un error
         if (mensaje) {
             mostrarAlerta(mensaje.msg, mensaje.categoria);
         }
-
-        obtenerClientes();
-
         // eslint-disable-next-line
     }, [mensaje]);
+
+    useEffect(() => {
+        obtenerClientes();
+        // eslint-disable-next-line 
+    }, [clientes]);
 
     return (
         <>
