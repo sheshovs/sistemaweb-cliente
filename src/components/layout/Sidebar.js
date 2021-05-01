@@ -22,6 +22,7 @@ const Sidebar = () => {
             <Separar>
                 <ItemsMenu>
                     <Link to={'/clientes'} className='enlace-nav'><IconItem className="fas fa-users"></IconItem> Clientes</Link>
+                    <Link to={'/ingresos'} className='enlace-nav'><IconItem className="fas fa-money-bill-wave"></IconItem> Ingresos</Link>
                     <Link to={'/reportes'} className='enlace-nav'><IconItem className="fas fa-file-invoice-dollar"></IconItem> Reportes</Link>
                 </ItemsMenu>
                 <BtnExit
@@ -89,6 +90,8 @@ const BtnExit = styled.button`
     cursor:pointer;
     color: white;
     font-size: 20px;
+    display: flex;
+    align-items:center;
 
     :hover{
         text-shadow: 0 0 10px rgba(255,255,255,.5);

@@ -7,11 +7,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import ClienteState from './components/context/clientes/clienteState';
 import TrabajoState from './components/context/trabajos/trabajoState';
+import IngresoState from './components/context/ingresos/ingresoState';
 import AlertaState from './components/context/alertas/alertaState';
 import AuthState from './components/context/autenticacion/authState';
 import tokenAuth from './config/tokenAuth';
 import RutaPrivada from './components/rutas/RutaPrivada';
 import Reportes from './components/reportes/Reportes';
+import Ingresos from './components/ingresos/Ingresos';
 
 
 
@@ -25,19 +27,22 @@ function App() {
   return (
     <ClienteState>
       <TrabajoState>
-        <AlertaState>
-          <AuthState>
-            <Router>
-              <Switch>
-                <Route exact path={'/'} component={Login} />
-                <Route exact path={'/nueva-cuenta'} component={NuevaCuenta} />
-                <RutaPrivada exact path={'/clientes'} component={Clientes} />
-                <RutaPrivada exact path={'/cliente/trabajos'} component={Trabajos} />
-                <RutaPrivada exact path={'/reportes'} component={Reportes} />
-              </Switch>
-            </Router>
-          </AuthState>
-        </AlertaState>
+        <IngresoState>
+          <AlertaState>
+            <AuthState>
+              <Router>
+                <Switch>
+                  <Route exact path={'/'} component={Login} />
+                  <Route exact path={'/nueva-cuenta'} component={NuevaCuenta} />
+                  <RutaPrivada exact path={'/clientes'} component={Clientes} />
+                  <RutaPrivada exact path={'/cliente/trabajos'} component={Trabajos} />
+                  <RutaPrivada exact path={'/reportes'} component={Reportes} />
+                  <RutaPrivada exact path={'/ingresos'} component={Ingresos} />
+                </Switch>
+              </Router>
+            </AuthState>
+          </AlertaState>
+        </IngresoState>
       </TrabajoState>
     </ClienteState>
   );
