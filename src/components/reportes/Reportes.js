@@ -15,8 +15,8 @@ const Reportes = () => {
     const { allTrabajos, obtenerTodosLosTrabajos } = trabajosContext;
 
     const [fecha, guardarFecha] = useState({
-        mes: new Date().toISOString().slice(0, 7),
-        anio: new Date().toISOString().slice(0, 4)
+        mes: new Date().toLocaleDateString().split('-').reverse().join('-').slice(0, 7),
+        anio: new Date().toLocaleDateString().split('-').reverse().join('-').slice(0, 4)
     });
 
     const { mes, anio } = fecha;
