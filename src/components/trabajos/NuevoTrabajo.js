@@ -17,7 +17,7 @@ const NuevoTrabajo = () => {
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
         kilometraje: 0,
-        fecha: new Date().toISOString().slice(0, 10),
+        fecha: new Date().toLocaleDateString().split('-').reverse().join('-'),
         costo: 0,
         cliente: clienteA._id,
         creador: clienteA.creador
@@ -25,6 +25,7 @@ const NuevoTrabajo = () => {
 
 
     const { descripcion, kilometraje, fecha, costo } = trabajo;
+
 
     useEffect(() => {
 
@@ -71,7 +72,7 @@ const NuevoTrabajo = () => {
         guardarTrabajo({
             descripcion: '',
             kilometraje: 0,
-            fecha: new Date().toISOString().slice(0, 10),
+            fecha: new Date().toLocaleDateString().split('-').reverse().join('-'),
             costo: 0,
             cliente: clienteA._id,
             creador: clienteA.creador
