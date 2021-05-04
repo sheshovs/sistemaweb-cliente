@@ -15,7 +15,8 @@ export default (state, action) => {
         case OBTENER_TRABAJOS:
             return {
                 ...state,
-                trabajoscliente: action.payload
+                trabajoscliente: action.payload,
+                estado: false
             }
         case AGREGAR_TRABAJO:
             return {
