@@ -14,9 +14,15 @@ const Reportes = () => {
     const trabajosContext = useContext(trabajoContext);
     const { allTrabajos, obtenerTodosLosTrabajos } = trabajosContext;
 
+    const fechaHoy = new Date();
+    const fechaReporteMensual = (fechaHoy.getMonth() + 1 < 10)
+        ? fechaHoy.getFullYear() + '-0' + (fechaHoy.getMonth() + 1)
+        : fechaHoy.getFullYear() + '-' + (fechaHoy.getMonth() + 1);
+    const fechaReporteAnual = new Date().getFullYear().toString()
+
     const [fecha, guardarFecha] = useState({
-        mes: new Date().toLocaleDateString().split('-').reverse().join('-').slice(0, 7),
-        anio: new Date().toLocaleDateString().split('-').reverse().join('-').slice(0, 4)
+        mes: fechaReporteMensual,
+        anio: fechaReporteAnual
     });
 
     const { mes, anio } = fecha;
@@ -73,6 +79,7 @@ const Reportes = () => {
 
     const obtenerReporteMensual = (e) => {
         e.preventDefault();
+
 
         var ingreso = 0;
 

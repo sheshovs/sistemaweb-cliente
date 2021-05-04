@@ -13,11 +13,16 @@ const NuevoTrabajo = () => {
     const trabajosContext = useContext(trabajoContext);
     const { estado, trabajoActual, agregarTrabajo, editarTrabajo, obtenerTrabajos, estadoEditar } = trabajosContext;
 
+    const fechaHoy = new Date();
+    const Dia = (fechaHoy.getDate() < 10) ? '0' + fechaHoy.getDate() : fechaHoy.getDate().toString();
+    const Mes = (fechaHoy.getMonth() + 1 < 10) ? '0' + (fechaHoy.getMonth() + 1) : (fechaHoy.getDate() + 1).toString();
+    const Anio = fechaHoy.getFullYear().toString();
+
 
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
         kilometraje: 0,
-        fecha: new Date().toLocaleDateString().split('-').reverse().join('-'),
+        fecha: Anio + '-' + Mes + '-' + Dia,
         costo: 0,
         cliente: clienteA._id,
         creador: clienteA.creador
@@ -41,9 +46,18 @@ const NuevoTrabajo = () => {
                 cliente: trabajoA.cliente,
                 creador: clienteA.creador
             });
+        } else {
+            guardarTrabajo({
+                descripcion: '',
+                kilometraje: 0,
+                fecha: Anio + '-' + Mes + '-' + Dia,
+                costo: 0,
+                cliente: clienteA._id,
+                creador: clienteA.creador
+            })
         }
         // eslint-disable-next-line
-    }, [trabajoActual]);
+    }, [trabajoActual, estado]);
 
 
     const onChange = e => {
@@ -72,7 +86,7 @@ const NuevoTrabajo = () => {
         guardarTrabajo({
             descripcion: '',
             kilometraje: 0,
-            fecha: new Date().toLocaleDateString().split('-').reverse().join('-'),
+            fecha: Anio + '-' + Mes + '-' + Dia,
             costo: 0,
             cliente: clienteA._id,
             creador: clienteA.creador
