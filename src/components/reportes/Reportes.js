@@ -4,6 +4,7 @@ import Sidebar from '../layout/Sidebar'
 import Nav from '../layout/Nav'
 import AuthContext from '../context/autenticacion/authContext';
 import trabajoContext from '../context/trabajos/trabajoContext'
+import ingresoContext from '../context/ingresos/ingresoContext'
 
 const Reportes = () => {
 
@@ -13,6 +14,9 @@ const Reportes = () => {
 
     const trabajosContext = useContext(trabajoContext);
     const { allTrabajos, obtenerTodosLosTrabajos } = trabajosContext;
+
+    const ingresosContext = useContext(ingresoContext);
+    const { ingresosUsuario, obtenerIngresos } = ingresosContext;
 
     const fechaHoy = new Date();
     const fechaReporteMensual = (fechaHoy.getMonth() + 1 < 10)
@@ -27,13 +31,14 @@ const Reportes = () => {
 
     const { mes, anio } = fecha;
 
-    const [ingresoMensual, guardarIngresoMensual] = useState(0);
-    const [ingresoAnual, guardarIngresoAnual] = useState(0);
+    const [reporteMensual, guardarReporteMensual] = useState(0);
+    const [reporteAnual, guardarReporteAnual] = useState(0);
 
 
     useEffect(() => {
         usuarioAutenticado();
         obtenerTodosLosTrabajos(usuario);
+        obtenerIngresos(usuario._id)
         // eslint-disable-next-line
     }, []);
 
@@ -81,29 +86,41 @@ const Reportes = () => {
         e.preventDefault();
 
 
-        var ingreso = 0;
+        var reporte = 0;
 
         allTrabajos.forEach(trabajo => {
             if (fecha.mes === trabajo.fecha.slice(0, 7)) {
-                ingreso += parseInt(trabajo.costo);
+                reporte += parseInt(trabajo.costo);
             }
         });
 
-        guardarIngresoMensual(ingreso);
+        ingresosUsuario.forEach(ingreso => {
+            if (fecha.mes === ingreso.fecha.slice(0, 7)) {
+                reporte += parseInt(ingreso.monto);
+            }
+        });
+
+        guardarReporteMensual(reporte);
     };
 
     const obtenerReporteAnual = (e) => {
         e.preventDefault();
 
-        var ingreso = 0;
+        var reporte = 0;
 
         allTrabajos.forEach(trabajo => {
             if (fecha.anio === trabajo.fecha.slice(0, 4)) {
-                ingreso += parseInt(trabajo.costo);
+                reporte += parseInt(trabajo.costo);
             }
         });
 
-        guardarIngresoAnual(ingreso);
+        ingresosUsuario.forEach(ingreso => {
+            if (fecha.anio === ingreso.fecha.slice(0, 4)) {
+                reporte += parseInt(ingreso.monto);
+            }
+        });
+
+        guardarReporteAnual(reporte);
     }
 
     return (
@@ -126,7 +143,7 @@ const Reportes = () => {
                             type='submit'
                         >Generar reporte</GenerarReporte>
                     </Group>
-                    <ParrafoResultado>Monto: ${ingresoMensual.toLocaleString('de-DE')}</ParrafoResultado>
+                    <ParrafoResultado>Monto: ${reporteMensual.toLocaleString('de-DE')}</ParrafoResultado>
 
                 </Formulario>
 
@@ -148,7 +165,7 @@ const Reportes = () => {
                             type='submit'
                         >Generar reporte</GenerarReporte>
                     </Group>
-                    <ParrafoResultado>Monto: ${ingresoAnual.toLocaleString('de-DE')}</ParrafoResultado>
+                    <ParrafoResultado>Monto: ${reporteAnual.toLocaleString('de-DE')}</ParrafoResultado>
 
                 </Formulario>
             </DivClientes>

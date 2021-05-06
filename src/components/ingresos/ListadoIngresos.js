@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Ingreso from './Ingreso'
 import styled from 'styled-components'
+import ingresoContext from '../context/ingresos/ingresoContext'
 
 const ListadoIngresos = () => {
 
-    const ingresos = [
-        { id: 1, descripcion: 'texto', monto: 15000, fecha: '20-04-2021' },
-        { id: 2, descripcion: 'texto2', monto: 12345, fecha: '22-04-2021' },
-        { id: 3, descripcion: 'texto3', monto: 4123, fecha: '24-04-2021' },
-        { id: 4, descripcion: 'texto4', monto: 5321, fecha: '28-04-2021' },
-    ]
+    const ingresosContext = useContext(ingresoContext);
+    const { ingresosFiltrados } = ingresosContext;
 
 
     return (
@@ -23,10 +20,10 @@ const ListadoIngresos = () => {
                 </DivHead>
             </thead>
             <tbody>
-                {ingresos.map(ingreso => (
+                {ingresosFiltrados.map(ingreso => (
 
                     <Ingreso
-                        key={ingreso.id}
+                        key={ingreso._id}
                         ingreso={ingreso}
                     />
                 ))}

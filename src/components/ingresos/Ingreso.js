@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components'
+import ingresoContext from '../context/ingresos/ingresoContext'
 
 const Ingreso = ({ ingreso }) => {
 
+    const ingresosContext = useContext(ingresoContext);
+    const { handleConfirmacionI, obtenerIngresoActual, handleEditarIngreso } = ingresosContext;
+
     const { descripcion, monto, fecha } = ingreso;
+
+    const selectIngreso = () => {
+        obtenerIngresoActual(ingreso._id);
+        handleEditarIngreso(true);
+    }
+
+    const mostrarPopupConfirmacion = () => {
+        handleConfirmacionI(true);
+        obtenerIngresoActual(ingreso._id);
+    }
+
     return (
         <Container>
             <DivInfo>{descripcion}</DivInfo>
             <DivInfo>{monto ? monto.toLocaleString('de-DE') : null}</DivInfo>
-            <DivInfo>{fecha}</DivInfo>
+            <DivInfo>{fecha.substr(8, 2) + '-' + fecha.substr(5, 2) + '-' + fecha.substr(0, 4)}</DivInfo>
             <DivAcciones>
                 <DivEditar
-                // onClick={selectTrabajo}
+                    onClick={selectIngreso}
                 ><i className="fas fa-edit"></i></DivEditar>
                 <DivEliminar
-                // onClick={mostrarPopupConfirmacion}
+                    onClick={mostrarPopupConfirmacion}
                 ><i className="fas fa-trash-alt"></i></DivEliminar>
             </DivAcciones>
         </Container>

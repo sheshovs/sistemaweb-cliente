@@ -6,22 +6,46 @@ import ListadoIngresos from './ListadoIngresos';
 import AuthContext from '../context/autenticacion/authContext';
 import ingresoContext from '../context/ingresos/ingresoContext';
 import NuevoIngreso from './NuevoIngreso';
+import ConfirmacionI from '../layout/ConfirmacionI'
+import EditarIngreso from './EditarIngreso';
 
 const Ingresos = () => {
 
     // Extaer la informacion de la autenticacion
     const authContext = useContext(AuthContext);
-    const { usuarioAutenticado } = authContext;
+    const { autenticado, usuario, usuarioAutenticado } = authContext;
 
     const ingresosContext = useContext(ingresoContext);
-    const { ingresoPopup, handleNuevoIngreso } = ingresosContext;
+    const { ingresosUsuario, editarIngreso, ingresoPopup, confirmacionI, handleNuevoIngreso, obtenerIngresos, filtrarIngresos } = ingresosContext;
 
+    const fechaHoy = new Date();
+    const Mes = (fechaHoy.getMonth() + 1 < 10) ? '0' + (fechaHoy.getMonth() + 1) : (fechaHoy.getDate() + 1).toString();
+    const Anio = fechaHoy.getFullYear().toString();
+
+    const [fecha, guardarFecha] = useState(
+        Anio + '-' + Mes
+    );
 
     useEffect(() => {
         usuarioAutenticado();
-
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        if (autenticado) {
+            obtenerIngresos(usuario._id);
+            setTimeout(() => {
+                filtrarIngresos(Anio + '-' + Mes);
+            }, 500);
+        }
+        // eslint-disable-next-line
+    }, [autenticado]);
+
+    useEffect(() => {
+        filtrarIngresos(fecha);
+        // eslint-disable-next-line
+    }, [ingresosUsuario]);
+
 
     const size = useWindowSize();
 
@@ -51,27 +75,39 @@ const Ingresos = () => {
         return windowSize;
     }
 
+
+    const onChange = (e) => {
+        guardarFecha(e.target.value);
+        if (e.target.value === '') return;
+        filtrarIngresos(e.target.value);
+    }
+
     const mostrarPopup = () => {
         handleNuevoIngreso(true);
     }
 
+
     return (
         <Container>
             {ingresoPopup ? <NuevoIngreso /> : null}
+            {editarIngreso ? <EditarIngreso /> : null}
+            {confirmacionI ? <ConfirmacionI /> : null}
             {window.innerWidth < 850 ? <Nav /> : <Sidebar />}
             <DivIngresos>
                 <Titulo>Ingresos</Titulo>
                 <DivBarraBtn>
                     <Busqueda>
                         <Input
-                            type='date'
+                            type='month'
                             name='fecha'
+                            value={fecha}
+                            onChange={onChange}
                         />
-                        <BtnBuscar
+                        {/* <BtnBuscar
                             type='submit'
                         >
                             <i className="fas fa-search"></i>
-                        </BtnBuscar>
+                        </BtnBuscar> */}
                     </Busqueda>
                     <BtnNuevoCliente
                         onClick={mostrarPopup}
@@ -164,7 +200,7 @@ const Input = styled.input`
     height:50px;
     border:none;
     border:1px solid rgba(0,0,0,.3);
-    border-radius:5px 0 0 5px;
+    border-radius:5px;
     padding:0 10px;
     font-size:16px;
     
@@ -182,15 +218,15 @@ const Input = styled.input`
     }
 `;
 
-const BtnBuscar = styled.button`
-    width:100px;
-    height:50px;
-    border-radius:0 5px 5px 0;
-    border:none;
-    border:1px solid rgba(0,0,0,.3);
-    border-left:none;
-    outline:none;
-`;
+// const BtnBuscar = styled.button`
+//     width:100px;
+//     height:50px;
+//     border-radius:0 5px 5px 0;
+//     border:none;
+//     border:1px solid rgba(0,0,0,.3);
+//     border-left:none;
+//     outline:none;
+// `;
 
 const BtnNuevoCliente = styled.div`
     width:200px;

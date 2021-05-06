@@ -3,24 +3,22 @@ import styled from 'styled-components'
 import ingresoContext from '../context/ingresos/ingresoContext'
 import AuthContext from '../context/autenticacion/authContext';
 
-const NuevoIngreso = () => {
+const EditarIngreso = () => {
 
     const authContext = useContext(AuthContext);
     const { usuario } = authContext;
 
     const ingresosContext = useContext(ingresoContext);
-    const { handleNuevoIngreso, agregarIngreso, obtenerIngresos } = ingresosContext;
+    const { ingresoActual, handleEditarIngreso, actualizarIngreso, obtenerIngresos } = ingresosContext;
 
-    const fechaHoy = new Date();
-    const Dia = (fechaHoy.getDate() < 10) ? '0' + fechaHoy.getDate() : fechaHoy.getDate().toString();
-    const Mes = (fechaHoy.getMonth() + 1 < 10) ? '0' + (fechaHoy.getMonth() + 1) : (fechaHoy.getDate() + 1).toString();
-    const Anio = fechaHoy.getFullYear().toString();
+    const [ingresoA] = ingresoActual;
 
     const [ingreso, guardarIngreso] = useState({
-        descripcion: '',
-        monto: 0,
-        fecha: Anio + '-' + Mes + '-' + Dia,
-        creador: usuario._id
+        _id: ingresoA._id,
+        descripcion: ingresoA.descripcion,
+        monto: ingresoA.monto,
+        fecha: ingresoA.fecha.slice(0, 10),
+        creador: ingresoA.creador
     })
 
     const { descripcion, monto, fecha } = ingreso;
@@ -33,7 +31,7 @@ const NuevoIngreso = () => {
     }
 
     const cerrarPopup = () => {
-        handleNuevoIngreso(false);
+        handleEditarIngreso(false);
     }
 
     const onSubmitForm = e => {
@@ -44,9 +42,8 @@ const NuevoIngreso = () => {
             return;
         }
 
-        //agregar ingreso
-        agregarIngreso(ingreso);
-        handleNuevoIngreso(false);
+        //actualizar ingreso
+        actualizarIngreso(ingreso);
         obtenerIngresos(usuario._id);
     }
 
@@ -55,7 +52,7 @@ const NuevoIngreso = () => {
             <Fondo onClick={cerrarPopup} ></Fondo>
             <Container>
                 <DivClientes>
-                    <Titulo>Agregar nuevo ingreso</Titulo>
+                    <Titulo>Editar ingreso</Titulo>
                     <Formulario
                         onSubmit={onSubmitForm}
                     >
@@ -99,7 +96,7 @@ const NuevoIngreso = () => {
                             <BtnEnviar
                                 type='submit'
                             >
-                                Agregar ingreso
+                                Actualizar ingreso
                             </BtnEnviar>
                             <BtnCancelar
                                 type='button'
@@ -116,7 +113,7 @@ const NuevoIngreso = () => {
     );
 };
 
-export default NuevoIngreso;
+export default EditarIngreso;
 
 const Fondo = styled.div`
     position:fixed;
