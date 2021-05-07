@@ -37,7 +37,7 @@ function App() {
                   <RutaPrivada exact path={'/clientes'} component={Clientes} />
                   <RutaPrivada exact path={'/cliente/trabajos'} component={Trabajos} />
                   <RutaPrivada exact path={'/reportes'} component={Reportes} />
-                  <RutaPrivada exact path={'/ingresos'} component={Ingresos} />
+                  <RutaPrivada exact path={'/otros'} component={Ingresos} />
                 </Switch>
               </Router>
             </AuthState>

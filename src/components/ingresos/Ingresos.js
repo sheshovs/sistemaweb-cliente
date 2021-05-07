@@ -94,7 +94,7 @@ const Ingresos = () => {
             {confirmacionI ? <ConfirmacionI /> : null}
             {window.innerWidth < 850 ? <Nav /> : <Sidebar />}
             <DivIngresos>
-                <Titulo>Ingresos</Titulo>
+                <Titulo>Otros ingresos</Titulo>
                 <DivBarraBtn>
                     <Busqueda>
                         <Input
