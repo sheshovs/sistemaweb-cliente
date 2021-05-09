@@ -23,9 +23,6 @@ code {
     monospace;
 }
 
-input{
-  -webkit-appearance: none;
-}
 
 h1{
   font-size: 1.5rem;
