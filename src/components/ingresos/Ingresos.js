@@ -157,7 +157,7 @@ const DivIngresos = styled.div`
     }
 `;
 const Titulo = styled.h1`
-    margin-bottom:50px;
+    margin-bottom:30px;
 
     @media (max-width:850px){
         margin-bottom:20px;

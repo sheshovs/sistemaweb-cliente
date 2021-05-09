@@ -32,6 +32,7 @@ const ResumenTrabajos = () => {
     );
 
     const [filtrados, guardarFiltrados] = useState([]);
+    const [sumaTotal, guardarSumaTotal] = useState(0);
 
     useEffect(() => {
         usuarioAutenticado();
@@ -48,8 +49,13 @@ const ResumenTrabajos = () => {
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         guardarFiltrados(allTrabajos.filter(trabajo => trabajo.fecha.slice(0, 7) === fecha ? trabajo : null));
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fecha]);
+
+    useEffect(() => {
+        sumarTotal(filtrados);
+    }, [filtrados]);
 
     // eslint-disable-next-line no-unused-vars
     const size = useWindowSize();
@@ -85,11 +91,24 @@ const ResumenTrabajos = () => {
         guardarFecha(e.target.value);
     }
 
+    const sumarTotal = (filtrados) => {
+        var suma = 0;
+        filtrados.map(trabajo =>
+            suma += parseInt(trabajo.costo)
+        );
+        console.log(suma);
+        guardarSumaTotal(suma);
+    }
+
     return (
         <Container>
             {window.innerWidth < 850 ? <Nav /> : <Sidebar />}
             <DivTrabajos>
-                <Titulo>Trabajos de {monthNames[parseInt(fecha.slice(5)) - 1]}: {filtrados.length}</Titulo>
+                <Titulo>
+                    Trabajos de {monthNames[parseInt(fecha.slice(5)) - 1]}: {filtrados.length}
+                    <br />
+                    <span>Monto total: ${sumaTotal.toLocaleString('de-DE')}</span>
+                </Titulo>
                 <DivBarraBtn>
                     <Busqueda>
                         <Input
@@ -144,10 +163,23 @@ const DivTrabajos = styled.div`
     }
 `;
 const Titulo = styled.h1`
-    margin-bottom:50px;
+    margin-bottom:30px;
+
+    span{
+        font-size:24px;
+    }
 
     @media (max-width:850px){
         margin-bottom:20px;
+        display: flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    @media (max-width:575px){
+        span{
+            font-size:1rem;
+        }
     }
 `;
 
@@ -161,9 +193,9 @@ const DivBarraBtn = styled.div`
     @media (max-width:1300px){
         width:100%;
     }
-    
-    @media (max-width:1080px){
-        width:100%;
+
+    @media (max-width:850px){
+        justify-content:center;
     }
 
     @media (max-width:575px){

@@ -24,10 +24,6 @@ code {
 }
 
 
-h1{
-  font-size: 1.5rem;
-}
-
 .enlace{
   color: white;
   text-decoration: none;
@@ -92,6 +88,11 @@ h1{
       top: 30px;
       right: 10px;
       left: auto;
+  }
+}
+@media (max-width:575px){
+  h1{
+    font-size: 1.5rem;
   }
 }
 
