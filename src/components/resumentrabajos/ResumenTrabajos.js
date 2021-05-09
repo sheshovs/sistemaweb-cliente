@@ -178,7 +178,6 @@ const Busqueda = styled.form`
 
     @media (max-width:575px){
         width:100%;
-        margin-bottom:20px;
     }
 `;
 
