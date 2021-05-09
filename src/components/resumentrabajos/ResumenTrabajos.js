@@ -55,7 +55,8 @@ const ResumenTrabajos = () => {
 
     useEffect(() => {
         sumarTotal(filtrados);
-    }, [filtrados]);
+
+    }, [filtrados, usuario]);
 
     // eslint-disable-next-line no-unused-vars
     const size = useWindowSize();
@@ -96,7 +97,6 @@ const ResumenTrabajos = () => {
         filtrados.map(trabajo =>
             suma += parseInt(trabajo.costo)
         );
-        console.log(suma);
         guardarSumaTotal(suma);
     }
 
