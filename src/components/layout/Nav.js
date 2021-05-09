@@ -34,7 +34,8 @@ const Nav = () => {
             </Head>
             <Menu id='nav'>
                 <Link to={'/clientes'} className='enlace-nav'><IconItem className="fas fa-users"></IconItem> Clientes</Link>
-                <Link to={'/otros'} className='enlace-nav'><IconItem className="fas fa-money-bill-wave"></IconItem> Otros</Link>
+                <Link to={'/trabajos'} className='enlace-nav'><IconItem className="fas fa-tools"></IconItem> Trabajos mensuales</Link>
+                <Link to={'/otros'} className='enlace-nav'><IconItem className="fas fa-money-bill-wave"></IconItem> Otros ingresos</Link>
                 <Link to={'/reportes'} className='enlace-nav'><IconItem className="fas fa-file-invoice-dollar"></IconItem> Reportes</Link>
                 <BtnExit
                     onClick={() => cerrarSesion()}

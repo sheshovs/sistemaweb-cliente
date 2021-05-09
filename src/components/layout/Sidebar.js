@@ -22,7 +22,8 @@ const Sidebar = () => {
             <Separar>
                 <ItemsMenu>
                     <Link to={'/clientes'} className='enlace-nav'><IconItem className="fas fa-users"></IconItem> Clientes</Link>
-                    <Link to={'/otros'} className='enlace-nav'><IconItem className="fas fa-money-bill-wave"></IconItem> Otros</Link>
+                    <Link to={'/trabajos'} className='enlace-nav'><IconItem className="fas fa-tools"></IconItem> Trabajos mensuales</Link>
+                    <Link to={'/otros'} className='enlace-nav'><IconItem className="fas fa-money-bill-wave"></IconItem> Otros ingresos</Link>
                     <Link to={'/reportes'} className='enlace-nav'><IconItem className="fas fa-file-invoice-dollar"></IconItem> Reportes</Link>
                 </ItemsMenu>
                 <BtnExit
@@ -60,7 +61,7 @@ const Titulo = styled.h1`
 const Separar = styled.div`
     margin:0 auto;
     padding:20px 0;
-    width:70%;
+    width:100%;
     height:calc(100vh - 150px);
     display:flex;
     flex-direction:column;

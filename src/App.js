@@ -14,8 +14,7 @@ import tokenAuth from './config/tokenAuth';
 import RutaPrivada from './components/rutas/RutaPrivada';
 import Reportes from './components/reportes/Reportes';
 import Ingresos from './components/ingresos/Ingresos';
-
-
+import ResumenTrabajos from './components/resumentrabajos/ResumenTrabajos';
 
 // revisar si tenemos un token
 const token = localStorage.getItem('token');
@@ -38,6 +37,7 @@ function App() {
                   <RutaPrivada exact path={'/cliente/trabajos'} component={Trabajos} />
                   <RutaPrivada exact path={'/reportes'} component={Reportes} />
                   <RutaPrivada exact path={'/otros'} component={Ingresos} />
+                  <RutaPrivada exact path={'/trabajos'} component={ResumenTrabajos} />
                 </Switch>
               </Router>
             </AuthState>

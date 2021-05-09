@@ -21,9 +21,9 @@ const NuevoTrabajo = () => {
 
     const [trabajo, guardarTrabajo] = useState({
         descripcion: '',
-        kilometraje: 0,
+        kilometraje: '',
         fecha: Anio + '-' + Mes + '-' + Dia,
-        costo: 0,
+        costo: '',
         cliente: clienteA._id,
         creador: clienteA.creador
     });
@@ -49,9 +49,9 @@ const NuevoTrabajo = () => {
         } else {
             guardarTrabajo({
                 descripcion: '',
-                kilometraje: 0,
+                kilometraje: '',
                 fecha: Anio + '-' + Mes + '-' + Dia,
-                costo: 0,
+                costo: '',
                 cliente: clienteA._id,
                 creador: clienteA.creador
             })
@@ -85,9 +85,9 @@ const NuevoTrabajo = () => {
 
         guardarTrabajo({
             descripcion: '',
-            kilometraje: 0,
+            kilometraje: '',
             fecha: Anio + '-' + Mes + '-' + Dia,
-            costo: 0,
+            costo: '',
             cliente: clienteA._id,
             creador: clienteA.creador
         });
