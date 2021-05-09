@@ -36,13 +36,14 @@ const ResumenTrabajos = () => {
     useEffect(() => {
         usuarioAutenticado();
 
-        obtenerTodosLosTrabajos(usuario);
-        obtenerClientes();
-
-        guardarFiltrados(allTrabajos.filter(trabajo => trabajo.fecha.slice(0, 7) === fecha ? trabajo : null));
+        setTimeout(() => {
+            obtenerTodosLosTrabajos(usuario);
+            obtenerClientes();
+            guardarFiltrados(allTrabajos.filter(trabajo => trabajo.fecha.slice(0, 7) === fecha ? trabajo : null));
+        }, 2000);
 
         // eslint-disable-next-line
-    }, [usuario]);
+    }, []);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,7 +84,6 @@ const ResumenTrabajos = () => {
         if (e.target.value === '') return;
         guardarFecha(e.target.value);
     }
-
 
     return (
         <Container>
