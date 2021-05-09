@@ -36,15 +36,20 @@ const ResumenTrabajos = () => {
 
     useEffect(() => {
         usuarioAutenticado();
-
-        setTimeout(() => {
-            obtenerTodosLosTrabajos(usuario);
-            obtenerClientes();
-            guardarFiltrados(allTrabajos.filter(trabajo => trabajo.fecha.slice(0, 7) === fecha ? trabajo : null));
-        }, 2000);
-
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        obtenerTodosLosTrabajos(usuario);
+        obtenerClientes();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [usuario]);
+
+    useEffect(() => {
+        guardarFiltrados(allTrabajos.filter(trabajo => trabajo.fecha.slice(0, 7) === fecha ? trabajo : null));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [allTrabajos]);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +61,9 @@ const ResumenTrabajos = () => {
     useEffect(() => {
         sumarTotal(filtrados);
 
-    }, [filtrados, usuario]);
+    }, [filtrados]);
+
+    console.log("hola");
 
     // eslint-disable-next-line no-unused-vars
     const size = useWindowSize();
