@@ -23,6 +23,10 @@ code {
     monospace;
 }
 
+input{
+  -webkit-appearance: none;
+}
+
 .enlace{
   color: white;
   text-decoration: none;
