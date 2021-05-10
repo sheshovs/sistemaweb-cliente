@@ -71,31 +71,32 @@ const Trabajos = () => {
     function downloadPDFWithjsPDF() {
         var doc = new jsPDF('p', 'pt', 'a4');
 
+        doc.setFont("arial", "normal");
         doc.setFontSize(24);
-        doc.text(20, 50, 'Cliente: ' + nombre);
+        doc.text(40, 50, 'Cliente: ' + nombre);
 
         doc.setFontSize(16);
-        doc.text(20, 90, 'Teléfono: ' + tel);
-        doc.text(20, 110, 'Patente: ' + patente.toUpperCase());
-        doc.text(20, 130, 'Marca: ' + marca);
-        doc.text(20, 150, 'Modelo: ' + modelo);
-        doc.text(20, 170, 'Año: ' + (anio == null || anio === 0 ? 'No ingresado' : anio));
+        doc.text(40, 90, 'Teléfono: ' + tel);
+        doc.text(40, 110, 'Patente: ' + patente.toUpperCase());
+        doc.text(40, 130, 'Marca: ' + marca);
+        doc.text(40, 150, 'Modelo: ' + modelo);
+        doc.text(40, 170, 'Año: ' + (anio == null || anio === 0 ? 'No ingresado' : anio));
 
-        doc.text(20, 210, 'Descripción:');
+        doc.text(40, 210, 'Trabajos:');
         doc.text(270, 110, 'Kilometraje');
         doc.text(400, 110, 'Fecha');
 
-        doc.text(130, 210, ultimoTrabajo.descripcion);
+        doc.text(120, 210, ultimoTrabajo.descripcion);
         doc.text(270, 130, (ultimoTrabajo.kilometraje == null || ultimoTrabajo.kilometraje === 0 ? 'No ingresado' : ultimoTrabajo.kilometraje.toLocaleString('de-DE')));
         doc.text(400, 130, ultimoTrabajo.fecha.substr(8, 2) + '-' + ultimoTrabajo.fecha.substr(5, 2) + '-' + ultimoTrabajo.fecha.substr(0, 4));
 
         doc.setFont("arial", "italic");
-        doc.text(20, 500, '*La bitácora de su vehiculo se encuentra registrada');
+        doc.text(40, 500, '*La bitácora de su vehículo se encuentra registrada');
 
         doc.setFont("arial", "normal");
-        doc.text(20, 540, 'Servicio Automotriz');
-        doc.text(20, 560, 'Sergio Vargas Rodriguez');
-        doc.text(20, 580, 'WhatsApp: (+56) 9 9279 5733');
+        doc.text(40, 540, 'Servicio Automotriz');
+        doc.text(40, 560, 'Sergio Vargas Rodriguez');
+        doc.text(40, 580, 'WhatsApp: (+56) 9 9279 5733');
 
         doc.save('Trabajos.pdf');
     }
