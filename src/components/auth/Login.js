@@ -16,8 +16,10 @@ const Login = props => {
 
     const [cargando, guardarCargando] = useState(false);
 
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
-        if (autenticado) {
+        if (token) {
             props.history.push('/clientes');
         }
 
